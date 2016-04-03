@@ -9,6 +9,6 @@
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
-        android:src="@drawable/steak"
+        android:src="@drawable/logo_steak"
         android:padding="40dp" />
 </LinearLayout>
