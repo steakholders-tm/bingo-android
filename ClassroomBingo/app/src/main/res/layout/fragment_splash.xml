@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
         android:src="@drawable/steak"
-        android:layout_marginTop="100dp" />
+        android:padding="40dp" />
 </LinearLayout>
