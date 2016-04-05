@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">Classroom Bingo</string>
     <string name="action_settings">Settings</string>
+
+    <!--String res for MainActivity-->
+    <string name="game_type">Game Type:</string>
+    <string name="place">Place:</string>
+    <string name="primary_category">Primary Category:</string>
+    <string name="secondary_category">Secondary Category:</string>
+    <string name="button_join">Join Game</string>
+    <string name="button_create">Create Game</string>
+
+    <!--String res for CreateGameFragment-->
+    <string name="name">Name:</string>
+    <string name="date">Date:</string>
+    <string name="start">Start:</string>
+    <string name="end">End:</string>
+
+    <!--String res for JoinGameFragment-->
+    <string name="placeholder">Placeholder</string>
+    <string name="nickname">Nickname</string>
+
 </resources>
