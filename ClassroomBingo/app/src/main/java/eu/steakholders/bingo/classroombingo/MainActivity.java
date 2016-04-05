@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
     }
 
     @Override
@@ -41,5 +40,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToJoinGame(View view){
+
+    }
+
+    public void goToCreateGame(View view){
+
     }
 }

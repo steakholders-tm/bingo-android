@@ -53,7 +53,8 @@
             android:id="@+id/join_game_button"
             android:layout_marginEnd="60dp"
             android:layout_below="@+id/include_main_layout"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:onClick="goToJoinGame"/>
     </RelativeLayout>
 
 </RelativeLayout>
