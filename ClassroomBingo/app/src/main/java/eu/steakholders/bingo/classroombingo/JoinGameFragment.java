@@ -25,7 +25,6 @@ public class JoinGameFragment extends Fragment {
                              Bundle savedInstanceState) {
         //Get view
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_join_game, null);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
 
         // Inflate the layout for this fragment

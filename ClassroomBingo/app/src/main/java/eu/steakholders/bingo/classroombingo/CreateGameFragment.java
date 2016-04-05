@@ -25,7 +25,6 @@ public class CreateGameFragment extends Fragment {
                              Bundle savedInstanceState) {
         //Get view
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_create_game, null);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
 
 
