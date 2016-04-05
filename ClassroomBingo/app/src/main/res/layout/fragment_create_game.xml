@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name"
-            android:id="@+id/create_nameTextView"
+            android:id="@+id/create_name_text_view"
             android:textSize="16sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp" />
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/game_type"
-            android:id="@+id/create_gtTextView"
+            android:id="@+id/create_gt_text_view"
             android:textSize="16sp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp" />
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/place"
-            android:id="@+id/create_placeTextView"
+            android:id="@+id/create_place_text_view"
             android:textSize="16sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp" />
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/primary_category"
-            android:id="@+id/create_pcTextView"
+            android:id="@+id/create_pc_text_view"
             android:textSize="16sp"
             android:layout_marginTop="35dp"
             android:layout_marginBottom="15dp" />
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/secondary_category"
-            android:id="@+id/create_scTextView"
+            android:id="@+id/create_sc_text_view"
             android:textSize="16sp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp" />
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date"
-            android:id="@+id/create_dateTextView"
+            android:id="@+id/create_date_text_view"
             android:textSize="16sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp" />
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/start"
-            android:id="@+id/create_startTextView"
+            android:id="@+id/create_start_text_view"
             android:textSize="16sp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp" />
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/end"
-            android:id="@+id/create_endTextView"
+            android:id="@+id/create_end_text_view"
             android:textSize="16sp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp" />
@@ -102,25 +102,25 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/crate_spinnerGT"
+            android:id="@+id/create_spinner_gt"
             android:spinnerMode="dropdown" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/create_spinnerPlace"
+            android:id="@+id/create_spinner_place"
             android:spinnerMode="dropdown"/>
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/create_spinnerPC"
+            android:id="@+id/create_spinner_pc"
             android:spinnerMode="dropdown"/>
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/create_spinnerSC"
+            android:id="@+id/create_spinner_sc"
             android:spinnerMode="dropdown"/>
 
         <EditText
@@ -152,6 +152,7 @@
         android:layout_height="wrap_content"
         android:text="@string/button_create"
         android:id="@+id/create_new_game_button"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:onClick="newGame"/>
 
 </FrameLayout>
