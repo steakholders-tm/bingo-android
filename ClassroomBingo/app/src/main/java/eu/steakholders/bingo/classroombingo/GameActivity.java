@@ -20,6 +20,10 @@ public class GameActivity extends AppCompatActivity {
     private Animation closeOverviewAnim;
     private FrameLayout overview;
 
+    /**
+     * Loads the board view, inflates the toolbar and starts the setup of the fab
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,11 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -39,6 +48,11 @@ public class GameActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -54,6 +68,9 @@ public class GameActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Maked the fab open and close an overview of the game
+     */
     private void setupFab(){
         openOverviewAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.open_board_overview);
         closeOverviewAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.close_board_overview);
@@ -83,6 +100,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Handles the animation and visibility of the overview
+     */
     private void openOverview (){
         overview.startAnimation(openOverviewAnim);
         overviewActive = true;
