@@ -228,9 +228,9 @@
             android:src="@drawable/overview_icon_white" />
 
         <FrameLayout
+            android:clickable="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
             android:visibility="invisible"
             android:id="@+id/overview">
 
@@ -242,7 +242,10 @@
                 android:layout_marginBottom="72dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginRight="16dp"
+                android:translationZ="6dp"
+                android:background="@drawable/bkg_rounded_corners"
+                android:padding="16dp">
 
                 <!-- Row 0 -->
                 <TableRow
