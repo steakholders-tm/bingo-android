@@ -58,35 +58,30 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerGT"
-            android:spinnerMode="dropdown"
-            android:layout_alignBaseline="@+id/gtTextView"
-            android:layout_alignBottom="@+id/gtTextView"
-            android:layout_toEndOf="@+id/scTextView" />
+            android:id="@+id/spinner_gt"
+            android:spinnerMode="dropdown" />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerPlace"
+            android:id="@+id/spinner_place"
             android:spinnerMode="dropdown"
-            android:layout_below="@+id/spinnerPC"
-            android:layout_toRightOf="@+id/scTextView" />
+           />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerPC"
+            android:id="@+id/spinner_pc"
             android:spinnerMode="dropdown"
-            android:layout_below="@+id/spinnerGT"
-            android:layout_toRightOf="@+id/scTextView" />
+            />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerSC"
+            android:id="@+id/spinner_sc"
             android:spinnerMode="dropdown"
-            android:layout_below="@+id/spinnerPlace"
-            android:layout_toRightOf="@+id/scTextView" />
+           />
+
     </LinearLayout>
 
     <ListView
