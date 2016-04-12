@@ -23,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     //https://steakholders.eu/api-docs/v1/api-docs
@@ -44,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private String gameName;
 
     //Spinner arrays
-    private String array1[];
+    private List<String> gameTypesList;
+    private List<String> placesList;
+    private List<String> primaryList;
+    private List<String> secondaryList;
 
 
     @Override
@@ -147,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
     public void newGame(View view){
         //TODO join and create game to server
     }
-
 
     public void removeFragment(View view){
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_main);
