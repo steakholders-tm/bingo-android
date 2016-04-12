@@ -1,14 +1,27 @@
 package eu.steakholders.bingo.classroombingo;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+
+import com.android.volley.*;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
     private Spinner primaryCatSpinner;
     private Spinner secondaryCatSpinner;
 
+    //Selected game to join
+    private String gameName;
+
+    //Spinner arrays
+    private String array1[];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         placeSpinner = (Spinner) findViewById(R.id.spinner_place);
         primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
         secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
+
+
 
     }
 
@@ -168,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void populateGameList(){
         //TODO populate gameList with items from server based on spinners
+    }
+
+    public void setSelectedName(){
+        //TODO set gameName = selected existing game
     }
 
     @Override
