@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
         primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
         secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
 
-
-
     }
 
     @Override
