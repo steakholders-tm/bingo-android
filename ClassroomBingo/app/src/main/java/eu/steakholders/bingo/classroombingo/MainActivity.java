@@ -1,20 +1,31 @@
 package eu.steakholders.bingo.classroombingo;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import com.android.volley.*;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
+
+    //https://steakholders.eu/api-docs/v1/api-docs
 
     //Fragments
     private JoinGameFragment joinGameFragment;
@@ -26,9 +37,14 @@ public class MainActivity extends AppCompatActivity {
     //Elements in layout
     private Spinner gameTypeSpinner;
     private Spinner placeSpinner;
-    private Spinner primaryCategorySpinner;
-    private Spinner secondaryCategorySpinner;
+    private Spinner primaryCatSpinner;
+    private Spinner secondaryCatSpinner;
 
+    //Selected game to join
+    private String gameName;
+
+    //Spinner arrays
+    private String array1[];
 
 
     @Override
@@ -38,12 +54,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Init layout variable
         mainPage = (RelativeLayout) findViewById(R.id.main_frame);
 
-        gameTypeSpinner = (Spinner) findViewById(R.id.spinnerGT);
-        placeSpinner = (Spinner) findViewById(R.id.spinnerPlace);
-        primaryCategorySpinner = (Spinner) findViewById(R.id.spinnerPC);
-        secondaryCategorySpinner = (Spinner) findViewById(R.id.spinnerSC);
+        //Init spinner variables
+        gameTypeSpinner = (Spinner) findViewById(R.id.spinner_gt);
+        placeSpinner = (Spinner) findViewById(R.id.spinner_place);
+        primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
+        secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
+
     }
 
     @Override
@@ -168,6 +187,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void populateGameList(){
         //TODO populate gameList with items from server based on spinners
+    }
+
+    public void setSelectedName(){
+        //TODO set gameName = selected existing game
     }
 
     @Override

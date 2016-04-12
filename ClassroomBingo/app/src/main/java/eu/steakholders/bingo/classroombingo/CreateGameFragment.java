@@ -7,12 +7,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CreateGameFragment extends Fragment {
+
+    //UI components
+    private EditText gameNameInput;
+    private Spinner gameTypeSpinner;
+    private Spinner placeSpinner;
+    private Spinner primarySpinner;
+    private Spinner secondarySpinner;
+    private EditText dateInput;
+    private EditText startTime;
+    private EditText endTime;
+
+    //Variables
+
 
 
     public CreateGameFragment() {
@@ -30,6 +45,11 @@ public class CreateGameFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void setSpinners(){
+        //TODO set all spinner values to the ones from the mainpage
+
     }
 
 }
