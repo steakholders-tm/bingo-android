@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     //Elements in layout
     private Spinner gameTypeSpinner;
     private Spinner placeSpinner;
+    private Spinner primaryCategorySpinner;
+    private Spinner secondaryCategorySpinner;
 
 
 
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         mainPage = (RelativeLayout) findViewById(R.id.main_frame);
 
+        gameTypeSpinner = (Spinner) findViewById(R.id.spinnerGT);
+        placeSpinner = (Spinner) findViewById(R.id.spinnerPlace);
+        primaryCategorySpinner = (Spinner) findViewById(R.id.spinnerPC);
+        secondaryCategorySpinner = (Spinner) findViewById(R.id.spinnerSC);
     }
 
     @Override
