@@ -23,7 +23,15 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import eu.steakholders.bingo.api.Game;
+import eu.steakholders.bingo.api.GameType;
 import eu.steakholders.bingo.api.Place;
+import eu.steakholders.bingo.api.PrimaryCategory;
+import eu.steakholders.bingo.api.SecondaryCategory;
+import eu.steakholders.bingo.api.Tile;
+import eu.steakholders.bingo.api.Winner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Elements in layout
     private Spinner gameTypeSpinner;
-    private Spinner placeSpinner;
+    private Spinner objectSpinner;
     private Spinner primaryCatSpinner;
     private Spinner secondaryCatSpinner;
 
@@ -61,20 +69,175 @@ public class MainActivity extends AppCompatActivity {
 
         //Init spinner variables
         gameTypeSpinner = (Spinner) findViewById(R.id.spinner_gt);
-        placeSpinner = (Spinner) findViewById(R.id.spinner_place);
+        objectSpinner = (Spinner) findViewById(R.id.spinner_place);
         primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
         secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
 
-        Place.getAll(this, new Response.Listener() {
+        Place.getById(this,1,  new Response.Listener<Object>() {
                     @Override
-                    public void onResponse(Object response) {
-                        System.out.println("Response2: " + response.toString());
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
+                        System.out.println(error);
+                    }
+                });
+        Place.getAll(this, new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        Game.getById(this,1,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        Game.getAll(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        GameType.getById(this,1,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        GameType.getAll(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        Tile.getById(this,1,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        Tile.getAll(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        Winner.getById(this,1,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        Winner.getAll(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        PrimaryCategory.getById(this,1,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        PrimaryCategory.getAll(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        SecondaryCategory.getById(this,1,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
+        SecondaryCategory.getAll(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
                         System.out.println(error);
                     }
                 });
@@ -113,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.fragment_container_main) != null) {
             hideMain();
 
-            // Create a new Fragment to be placed in the activity layout
+            // Create a new Fragment to be objectd in the activity layout
             joinGameFragment = new JoinGameFragment();
 
 
@@ -144,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.fragment_container_main) != null) {
             hideMain();
 
-            // Create a new Fragment to be placed in the activity layout
+            // Create a new Fragment to be objectd in the activity layout
             createGameFragment = new CreateGameFragment();
 
             // In case this activity was started with special instructions from an
@@ -190,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPlaces(){
-        //TODO add places to spinner
+        //TODO add objects to spinner
     }
 
     public void addPrimary(){

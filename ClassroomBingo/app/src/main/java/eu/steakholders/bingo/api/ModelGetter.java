@@ -49,7 +49,7 @@ public abstract class ModelGetter {
 
 
     public static void getById(Context context, String url, int id, Response.Listener success , Response.ErrorListener error){
-        request(context, Request.Method.GET, API_URL + url + id + API_FORMAT, null, success, error);
+        request(context, Request.Method.GET, API_URL + url + "/" + id + API_FORMAT, null, success, error);
     }
 
     public static void getAll(Context context,String url, Response.Listener success , Response.ErrorListener error){
@@ -60,7 +60,7 @@ public abstract class ModelGetter {
         if(queue == null){
             queue = Volley.newRequestQueue(context);
         }
-
+        System.out.println(url);
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(method, url, payload, success, error);
 
         queue.add(jsObjRequest);

@@ -7,4 +7,7 @@ public class ModelGetterAndSetter extends ModelGetter {
     public ModelGetterAndSetter(Context c) {
         super(c);
     }
+
+    public ModelGetterAndSetter() {
+    }
 }
