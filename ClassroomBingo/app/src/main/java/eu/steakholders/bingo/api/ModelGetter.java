@@ -48,11 +48,11 @@ public abstract class ModelGetter {
     }
 
 
-    public static void getById(Context context, String url, int id, Response.Listener success , Response.ErrorListener error){
+    protected static void getById(Context context, String url, int id, Response.Listener success , Response.ErrorListener error){
         request(context, Request.Method.GET, API_URL + url + "/" + id + API_FORMAT, null, success, error);
     }
 
-    public static void getAll(Context context,String url, Response.Listener success , Response.ErrorListener error){
+    protected static void getAll(Context context,String url, Response.Listener success , Response.ErrorListener error){
         requestAll(context, Request.Method.GET, API_URL + url + API_FORMAT, null, success, error);
     }
 
