@@ -23,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import eu.steakholders.bingo.api.Place;
+
 public class MainActivity extends AppCompatActivity {
 
     //https://steakholders.eu/api-docs/v1/api-docs
@@ -62,6 +64,20 @@ public class MainActivity extends AppCompatActivity {
         placeSpinner = (Spinner) findViewById(R.id.spinner_place);
         primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
         secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
+
+        Place.getAll(this, new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        System.out.println("Response2: " + response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        System.out.println(error);
+                    }
+                });
 
     }
 
