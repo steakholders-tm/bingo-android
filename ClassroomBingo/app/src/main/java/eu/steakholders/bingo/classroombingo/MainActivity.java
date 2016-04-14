@@ -12,22 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.android.volley.*;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+//https://steakholders.eu/api/v1/?format=api
+//https://steakholders.eu/api-docs/v1/api-docs
 
-    //https://steakholders.eu/api-docs/v1/api-docs
+public class MainActivity extends AppCompatActivity {
 
     //Fragments
     private JoinGameFragment joinGameFragment;
@@ -41,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private Spinner placeSpinner;
     private Spinner primaryCatSpinner;
     private Spinner secondaryCatSpinner;
+
+    //ArrayAdapter for spinners
+    private ArrayAdapter<String> adapter;
 
     //Selected game to join
     private String gameName;
