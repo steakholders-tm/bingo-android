@@ -6,6 +6,7 @@ import android.content.Context;
 import com.android.volley.Response;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -16,30 +17,117 @@ public class Game extends ModelGetterAndSetter {
     private String name;
     private String date;
     private int duration;
-    private GameType gameType;
-    private Place place;
-    private PrimaryCategory primaryCategory;
-    private SecondaryCategory secondaryCategory;
-    private ArrayList<Tile> tiles;
+    private int gameTypeId;
+    private int placeId;
+    private int primaryCategoryId;
+    private int secondaryCategoryId;
+    private ArrayList<Integer> tileIds;
 
 
     public Game(Context c) {
         super(c);
     }
 
-    public Game(int id, String name, String date, int duration, GameType gameType, Place place, PrimaryCategory primaryCategory, SecondaryCategory secondaryCategory, ArrayList<Tile> tiles) {
+    public Game(int id, String name, String date, int duration, int gameTypeId, int placeId, int primaryCategoryId, int secondaryCategoryId, ArrayList<Integer> tileIds) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.duration = duration;
-        this.gameType = gameType;
-        this.place = place;
-        this.primaryCategory = primaryCategory;
-        this.secondaryCategory = secondaryCategory;
-        this.tiles = tiles;
+        this.gameTypeId = gameTypeId;
+        this.placeId = placeId;
+        this.primaryCategoryId = primaryCategoryId;
+        this.secondaryCategoryId = secondaryCategoryId;
+        this.tileIds = tileIds;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getGameTypeId() {
+        return gameTypeId;
+    }
+
+    public void setGameTypeId(int gameTypeId) {
+        this.gameTypeId = gameTypeId;
+    }
+
+    public int getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+
+    public int getPrimaryCategoryId() {
+        return primaryCategoryId;
+    }
+
+    public void setPrimaryCategoryId(int primaryCategoryId) {
+        this.primaryCategoryId = primaryCategoryId;
+    }
+
+    public int getSecondaryCategoryId() {
+        return secondaryCategoryId;
+    }
+
+    public void setSecondaryCategoryId(int secondaryCategoryId) {
+        this.secondaryCategoryId = secondaryCategoryId;
+    }
+
+    public ArrayList<Integer> getTileIds() {
+        return tileIds;
+    }
+
+    public void setTileIds(ArrayList<Integer> tileIds) {
+        this.tileIds = tileIds;
+    }
+
+    private JSONObject toJSONObject(){
+        JSONObject jOjct = new JSONObject();
+        try {
+            jOjct.put("name",this.name);
+            jOjct.put("date",this.date);
+            jOjct.put("duration",this.duration);
+            jOjct.put("gameType",this.gameTypeId);
+            jOjct.put("place",this.placeId);
+            jOjct.put("primaryCategory",this.primaryCategoryId);
+            jOjct.put("secondaryCategory",this.secondaryCategoryId);
+            jOjct.put("tiles",this.tileIds);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jOjct;
+    }
+
+    public void save(Context context, Response.Listener success, Response.ErrorListener error){
+
+    }
 
     private static Game fromJSONObject(JSONObject response) {
         return new Game(
@@ -47,13 +135,22 @@ public class Game extends ModelGetterAndSetter {
                 response.optString("name", ""),
                 response.optString("date",""),
                 response.optInt("duration",1),
-                GameType.fromJSONObject(response.optJSONObject("game_type")),
-                Place.fromJSONObject(response.optJSONObject("place")),
-                PrimaryCategory.fromJSONObject(response.optJSONObject("primary_category")),
-                SecondaryCategory.fromJSONObject(response.optJSONObject("secondary_category")),
-                Tile.fromJSONArray(response.optJSONArray("tiles"))
+                response.optInt("game_type", -1),
+                response.optInt("place", -1),
+                response.optInt("primary_category", -1),
+                response.optInt("secondary_category", -1),
+                tilesIdArrayListFromJSONArray(response.optJSONArray("tiles"))
         );
     }
+
+    private static ArrayList<Integer> tilesIdArrayListFromJSONArray(JSONArray tiles) {
+        ArrayList<Integer> tileIds = new ArrayList<Integer>();
+        for(int i = 0; i < tiles.length(); i++){
+            tileIds.add(new Integer(tiles.optInt(i)));
+        }
+        return tileIds;
+    }
+
     public static void getById(Context context, int id, final Response.Listener success , Response.ErrorListener error){
         ModelGetter.getById(
                 context,

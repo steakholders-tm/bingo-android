@@ -2,6 +2,11 @@ package eu.steakholders.bingo.api;
 
 import android.content.Context;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+
+import org.json.JSONObject;
+
 public class ModelGetterAndSetter extends ModelGetter {
 
     public ModelGetterAndSetter(Context c) {
@@ -9,5 +14,9 @@ public class ModelGetterAndSetter extends ModelGetter {
     }
 
     public ModelGetterAndSetter() {
+    }
+
+    protected static void create(Context context, String url, JSONObject payload, Response.Listener success , Response.ErrorListener error){
+        request(context, Request.Method.POST, API_URL + url + "/" + API_FORMAT, payload, success, error);
     }
 }
