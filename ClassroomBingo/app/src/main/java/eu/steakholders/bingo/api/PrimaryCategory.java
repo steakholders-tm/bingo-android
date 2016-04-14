@@ -26,6 +26,30 @@ public class PrimaryCategory extends ModelGetter {
         this.description = description;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public static void getById(Context context, int id, final Response.Listener success , Response.ErrorListener error){
         ModelGetter.getById(
                 context,
@@ -34,7 +58,7 @@ public class PrimaryCategory extends ModelGetter {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(PrimaryCategory.fromJSONObject(response));
                     }
                 },
@@ -42,7 +66,10 @@ public class PrimaryCategory extends ModelGetter {
 
     }
 
-    private static PrimaryCategory fromJSONObject(JSONObject response) {
+    public static PrimaryCategory fromJSONObject(JSONObject response) {
+        if(response == null){
+            return null;
+        }
         return new PrimaryCategory(
                 response.optInt("id", -1),
                 response.optString("name", ""),
@@ -50,7 +77,10 @@ public class PrimaryCategory extends ModelGetter {
         );
     }
 
-    private static ArrayList<PrimaryCategory> fromJSONArray(JSONArray response) {
+    public static ArrayList<PrimaryCategory> fromJSONArray(JSONArray response) {
+        if(response == null){
+            return null;
+        }
         ArrayList<PrimaryCategory> primary_categorys = new ArrayList<PrimaryCategory>();
         for( int i = 0; i < response.length(); i++){
             try{
@@ -70,7 +100,7 @@ public class PrimaryCategory extends ModelGetter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(PrimaryCategory.fromJSONArray(response));
                     }
                 },

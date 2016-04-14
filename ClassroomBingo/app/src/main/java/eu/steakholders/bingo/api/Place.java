@@ -16,6 +16,31 @@ public class Place extends ModelGetter {
     protected static String API_PATH = "place";
     private int id;
     private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private String description;
 
     public Place(Context c) {
@@ -36,7 +61,7 @@ public class Place extends ModelGetter {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(Place.fromJSONObject(response));
                     }
                 },
@@ -44,7 +69,10 @@ public class Place extends ModelGetter {
 
     }
 
-    private static Place fromJSONObject(JSONObject response) {
+    public static Place fromJSONObject(JSONObject response) {
+        if(response == null){
+            return null;
+        }
         return new Place(
                 response.optInt("id", -1),
                 response.optString("name", ""),
@@ -52,7 +80,10 @@ public class Place extends ModelGetter {
         );
     }
 
-    private static ArrayList<Place> fromJSONArray(JSONArray response) {
+    public static ArrayList<Place> fromJSONArray(JSONArray response) {
+        if(response == null){
+            return null;
+        }
         ArrayList<Place> places = new ArrayList<Place>();
         for( int i = 0; i < response.length(); i++){
             try{
@@ -72,7 +103,7 @@ public class Place extends ModelGetter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(Place.fromJSONArray(response));
                     }
                 },

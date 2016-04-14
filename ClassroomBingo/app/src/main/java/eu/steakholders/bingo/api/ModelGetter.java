@@ -32,7 +32,7 @@ public abstract class ModelGetter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Response: " + response.toString());
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -60,7 +60,6 @@ public abstract class ModelGetter {
         if(queue == null){
             queue = Volley.newRequestQueue(context);
         }
-        System.out.println(url);
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(method, url, payload, success, error);
 
         queue.add(jsObjRequest);

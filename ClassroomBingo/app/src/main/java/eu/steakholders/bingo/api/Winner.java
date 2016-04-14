@@ -8,22 +8,36 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Winner extends ModelGetterAndSetter {
     protected static String API_PATH = "winners";
     private int id;
     private String name;
-    private String description;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Winner(Context c) {
         super(c);
     }
 
-    public Winner(int id, String name, String description){
+    public Winner(int id, String name){
         this.id = id;
         this.name = name;
-        this.description = description;
     }
 
     public static void getById(Context context, int id, final Response.Listener success , Response.ErrorListener error){
@@ -34,7 +48,7 @@ public class Winner extends ModelGetterAndSetter {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(Winner.fromJSONObject(response));
                     }
                 },
@@ -42,15 +56,20 @@ public class Winner extends ModelGetterAndSetter {
 
     }
 
-    private static Winner fromJSONObject(JSONObject response) {
+    public static Winner fromJSONObject(JSONObject response) {
+        if(response == null){
+            return null;
+        }
         return new Winner(
                 response.optInt("id", -1),
-                response.optString("name", ""),
-                response.optString("description","")
+                response.optString("name", "")
         );
     }
 
-    private static ArrayList<Winner> fromJSONArray(JSONArray response) {
+    public static ArrayList<Winner> fromJSONArray(JSONArray response) {
+        if(response == null){
+            return null;
+        }
         ArrayList<Winner> winners = new ArrayList<Winner>();
         for( int i = 0; i < response.length(); i++){
             try{
@@ -70,7 +89,7 @@ public class Winner extends ModelGetterAndSetter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(Winner.fromJSONArray(response));
                     }
                 },

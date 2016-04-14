@@ -12,6 +12,30 @@ import java.util.ArrayList;
 public class GameType extends ModelGetter {
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     protected static String API_PATH = "game-type";
     private int id;
     private String name;
@@ -36,7 +60,7 @@ public class GameType extends ModelGetter {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(GameType.fromJSONObject(response));
                     }
                 },
@@ -44,7 +68,10 @@ public class GameType extends ModelGetter {
 
     }
 
-    private static GameType fromJSONObject(JSONObject response) {
+    public static GameType fromJSONObject(JSONObject response) {
+        if(response == null){
+            return null;
+        }
         return new GameType(
                 response.optInt("id", -1),
                 response.optString("name", ""),
@@ -52,7 +79,10 @@ public class GameType extends ModelGetter {
         );
     }
 
-    private static ArrayList<GameType> fromJSONArray(JSONArray response) {
+    public static ArrayList<GameType> fromJSONArray(JSONArray response) {
+        if(response == null){
+            return null;
+        }
         ArrayList<GameType> game_types = new ArrayList<GameType>();
         for( int i = 0; i < response.length(); i++){
             try{
@@ -72,7 +102,7 @@ public class GameType extends ModelGetter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(GameType.fromJSONArray(response));
                     }
                 },

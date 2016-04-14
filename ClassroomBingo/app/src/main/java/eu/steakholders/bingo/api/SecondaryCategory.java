@@ -15,6 +15,29 @@ public class SecondaryCategory extends ModelGetter{
     private String name;
     private String description;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public SecondaryCategory(Context c) {
         super(c);
@@ -34,7 +57,7 @@ public class SecondaryCategory extends ModelGetter{
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(SecondaryCategory.fromJSONObject(response));
                     }
                 },
@@ -42,7 +65,10 @@ public class SecondaryCategory extends ModelGetter{
 
     }
 
-    private static SecondaryCategory fromJSONObject(JSONObject response) {
+    public static SecondaryCategory fromJSONObject(JSONObject response) {
+        if(response == null){
+            return null;
+        }
         return new SecondaryCategory(
                 response.optInt("id", -1),
                 response.optString("name", ""),
@@ -50,7 +76,10 @@ public class SecondaryCategory extends ModelGetter{
         );
     }
 
-    private static ArrayList<SecondaryCategory> fromJSONArray(JSONArray response) {
+    public static ArrayList<SecondaryCategory> fromJSONArray(JSONArray response) {
+        if(response == null){
+            return null;
+        }
         ArrayList<SecondaryCategory> secondary_categorys = new ArrayList<SecondaryCategory>();
         for( int i = 0; i < response.length(); i++){
             try{
@@ -70,7 +99,7 @@ public class SecondaryCategory extends ModelGetter{
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Response: " + response.toString());
+
                         success.onResponse(SecondaryCategory.fromJSONArray(response));
                     }
                 },
