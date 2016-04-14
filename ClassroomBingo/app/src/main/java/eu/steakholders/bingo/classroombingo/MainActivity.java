@@ -1,5 +1,6 @@
 package eu.steakholders.bingo.classroombingo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 // Intent, pass the Intent's extras to the fragment as arguments
                 joinGameFragment.setArguments(getIntent().getExtras());
 
+                joinGameFragment.setGameName(gameName);
 
                 // Add the fragment to the 'fragment_container' FrameLayout
                 getSupportFragmentManager().beginTransaction()
@@ -126,7 +128,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void joinGame(View view){
-        //TODO join game at server
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("GAME_NAME", gameName);
+        /* Not sure what other data needed to send
+        intent.putExtra();
+        intent.putExtra();
+        intent.putExtra();
+        intent.putExtra();
+        */
+        startActivity(intent);
     }
 
     public void goToCreateGame(View view){
@@ -156,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void newGame(View view){
         //TODO join and create game to server
+
+
+        joinGame(view);
     }
 
     public void removeFragment(View view){
