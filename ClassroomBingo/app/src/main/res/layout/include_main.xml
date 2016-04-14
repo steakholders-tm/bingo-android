@@ -56,28 +56,28 @@
         android:id="@+id/spinnerLayout">
 
         <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
             android:id="@+id/spinner_gt"
             android:spinnerMode="dropdown" />
 
         <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
             android:id="@+id/spinner_place"
             android:spinnerMode="dropdown"
            />
 
         <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
             android:id="@+id/spinner_pc"
             android:spinnerMode="dropdown"
             />
 
         <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
             android:id="@+id/spinner_sc"
             android:spinnerMode="dropdown"
            />
@@ -92,6 +92,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:choiceMode="singleChoice" />
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/colorPrimary" />
 
 </RelativeLayout>

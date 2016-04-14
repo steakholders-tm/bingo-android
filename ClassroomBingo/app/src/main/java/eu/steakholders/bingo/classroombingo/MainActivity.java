@@ -2,13 +2,16 @@ package eu.steakholders.bingo.classroombingo;
 
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner placeSpinner;
     private Spinner primaryCatSpinner;
     private Spinner secondaryCatSpinner;
+    private ListView existingGames;
 
     //ArrayAdapter for spinners
     private ArrayAdapter<String> adapter;
@@ -60,7 +64,17 @@ public class MainActivity extends AppCompatActivity {
         placeSpinner = (Spinner) findViewById(R.id.spinner_place);
         primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
         secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
+        existingGames = (ListView) findViewById(R.id.existingGameList);
 
+        existingGames.setOnItemClickListener(new ExistingGameListListener());
+
+    }
+
+    private class ExistingGameListListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            setSelectedGameName((String) existingGames.getItemAtPosition(position));
+        }
     }
 
     @Override
@@ -86,28 +100,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToJoinGame(View view){
-        //TODO add check for fields if filled out
+        if(checkFields("join")){
+            removeFragment(view);
+            // Check that the activity is using the layout version with
+            // the fragment_container FrameLayout
+            if (findViewById(R.id.fragment_container_main) != null) {
+                hideMain();
+
+                // Create a new Fragment to be placed in the activity layout
+                joinGameFragment = new JoinGameFragment();
 
 
-        removeFragment(view);
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
-        if (findViewById(R.id.fragment_container_main) != null) {
-            hideMain();
-
-            // Create a new Fragment to be placed in the activity layout
-            joinGameFragment = new JoinGameFragment();
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
+                joinGameFragment.setArguments(getIntent().getExtras());
 
 
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            joinGameFragment.setArguments(getIntent().getExtras());
+                // Add the fragment to the 'fragment_container' FrameLayout
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container_main, joinGameFragment).addToBackStack("join").commit();
 
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container_main, joinGameFragment).addToBackStack("join").commit();
-
+            }
         }
 
     }
@@ -117,27 +130,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToCreateGame(View view){
-        //TODO add check for fields if filled out
+        if(checkFields("create")){
+            removeFragment(view);
+            // Check that the activity is using the layout version with
+            // the fragment_container FrameLayout
+            if (findViewById(R.id.fragment_container_main) != null) {
+                hideMain();
+
+                // Create a new Fragment to be placed in the activity layout
+                createGameFragment = new CreateGameFragment();
+
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
+                createGameFragment.setArguments(getIntent().getExtras());
 
 
-        removeFragment(view);
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
-        if (findViewById(R.id.fragment_container_main) != null) {
-            hideMain();
+                // Add the fragment to the 'fragment_container' FrameLayout
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container_main, createGameFragment).addToBackStack("create").commit();
 
-            // Create a new Fragment to be placed in the activity layout
-            createGameFragment = new CreateGameFragment();
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            createGameFragment.setArguments(getIntent().getExtras());
-
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container_main, createGameFragment).addToBackStack("create").commit();
-
+            }
         }
 
     }
@@ -186,8 +198,27 @@ public class MainActivity extends AppCompatActivity {
         //TODO populate gameList with items from server based on spinners
     }
 
-    public void setSelectedName(){
-        //TODO set gameName = selected existing game
+    public void setSelectedGameName(String gameName){
+        this.gameName = gameName;
+    }
+
+
+    //Check all the spinners if they are empty
+    public boolean checkFields(String button){
+        if(button.equals("create")){
+            return true;
+        }else if(button.equals("join")){
+            if(gameName != null){
+                return true;
+            }
+        }else{
+            System.out.println("Something went wrong");
+        }
+        Snackbar snackbar = Snackbar
+                .make(mainPage, "Did you select a game to join? If none exists consider creating your own!", Snackbar.LENGTH_LONG);
+
+        snackbar.show();
+        return false;
     }
 
     @Override
