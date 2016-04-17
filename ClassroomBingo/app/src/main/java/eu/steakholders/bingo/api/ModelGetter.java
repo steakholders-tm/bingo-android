@@ -65,12 +65,20 @@ public abstract class ModelGetter {
         queue.add(jsObjRequest);
     }
 
-    protected static void requestAll(Context context,int method, String url, JSONArray payload, Response.Listener success , Response.ErrorListener error){
+    protected static void requestAll(Context context, int method, String url, JSONArray payload, Response.Listener success , final Response.ErrorListener errorListener){
         if(queue == null){
             queue = Volley.newRequestQueue(context);
         }
 
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(method, url, payload, success, error);
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(method, url, payload, success,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(new String(error.networkResponse.data));
+                        errorListener.onErrorResponse(error);
+                    }
+                }
+        );
 
         queue.add(jsObjRequest);
     }

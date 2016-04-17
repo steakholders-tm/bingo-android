@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import eu.steakholders.bingo.api.Game;
 import eu.steakholders.bingo.api.GameType;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         objectSpinner = (Spinner) findViewById(R.id.spinner_place);
         primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
         secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
-
+/*
         Place.getById(this,1,  new Response.Listener<Object>() {
                     @Override
                     public void onResponse(Object object) {
@@ -239,6 +240,36 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         System.out.println(error);
+                    }
+                });*/
+       /* Game game = new Game(1,"Tetst fromjava", "1993-12-27", "13:37",1,1,1,1,1,null );
+
+        game.save(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.networkResponse);
+                        System.out.println(new String(error.networkResponse.data));
+                        System.out.println(error.getLocalizedMessage());
+                    }
+                });*/
+
+        Winner winner = new Winner("Dag", 1, "2016-04-13T20:58:19Z");
+        winner.save(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Response: " + object.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
                     }
                 });
 

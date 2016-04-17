@@ -5,15 +5,20 @@ import android.content.Context;
 import com.android.volley.Response;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import eu.steakholders.bingo.classroombingo.MainActivity;
+
 public class Winner extends ModelGetterAndSetter {
     protected static String API_PATH = "winners";
     private int id;
     private String name;
+    private int gameId;
+    private String time;
 
     public String getName() {
         return name;
@@ -35,9 +40,19 @@ public class Winner extends ModelGetterAndSetter {
         super(c);
     }
 
-    public Winner(int id, String name){
+
+    public Winner(int id, String name, int gameId, String time){
         this.id = id;
         this.name = name;
+        this.gameId = gameId;
+        this.time = time;
+    }
+
+
+    public Winner(String name, int gameId, String time){
+        this.name = name;
+        this.gameId = gameId;
+        this.time = time;
     }
 
     public static void getById(Context context, int id, final Response.Listener success , Response.ErrorListener error){
@@ -62,7 +77,9 @@ public class Winner extends ModelGetterAndSetter {
         }
         return new Winner(
                 response.optInt("id", -1),
-                response.optString("name", "")
+                response.optString("name", ""),
+                response.optInt("gameId", -1),
+                response.optString("time", "")
         );
     }
 
@@ -94,5 +111,20 @@ public class Winner extends ModelGetterAndSetter {
                     }
                 },
                 error);
+    }
+
+    private JSONObject toJSONObject(){
+        JSONObject jOjct = new JSONObject();
+        try {
+            jOjct.put("name",this.name);
+            jOjct.put("gameId",this.gameId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jOjct;
+    }
+
+    public void save(Context context, Response.Listener success, Response.ErrorListener error){
+        ModelGetterAndSetter.create(context, API_PATH,this.toJSONObject(),success, error);
     }
 }

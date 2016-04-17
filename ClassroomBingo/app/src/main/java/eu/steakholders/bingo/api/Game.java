@@ -16,6 +16,7 @@ public class Game extends ModelGetterAndSetter {
     private int id;
     private String name;
     private String date;
+    private String time;
     private int duration;
     private int gameTypeId;
     private int placeId;
@@ -28,10 +29,11 @@ public class Game extends ModelGetterAndSetter {
         super(c);
     }
 
-    public Game(int id, String name, String date, int duration, int gameTypeId, int placeId, int primaryCategoryId, int secondaryCategoryId, ArrayList<Integer> tileIds) {
+    public Game(int id, String name, String date, String time, int duration, int gameTypeId, int placeId, int primaryCategoryId, int secondaryCategoryId, ArrayList<Integer> tileIds) {
         this.id = id;
         this.name = name;
         this.date = date;
+        this.time = time;
         this.duration = duration;
         this.gameTypeId = gameTypeId;
         this.placeId = placeId;
@@ -112,12 +114,13 @@ public class Game extends ModelGetterAndSetter {
         JSONObject jOjct = new JSONObject();
         try {
             jOjct.put("name",this.name);
-            jOjct.put("date",this.date);
+            jOjct.put("date", this.date);
+            jOjct.put("time",this.time);
             jOjct.put("duration",this.duration);
-            jOjct.put("gameType",this.gameTypeId);
+            jOjct.put("game_type",this.gameTypeId);
             jOjct.put("place",this.placeId);
-            jOjct.put("primaryCategory",this.primaryCategoryId);
-            jOjct.put("secondaryCategory",this.secondaryCategoryId);
+            jOjct.put("primary_category",this.primaryCategoryId);
+            jOjct.put("secondary_category",this.secondaryCategoryId);
             jOjct.put("tiles",this.tileIds);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -126,14 +129,15 @@ public class Game extends ModelGetterAndSetter {
     }
 
     public void save(Context context, Response.Listener success, Response.ErrorListener error){
-
+        ModelGetterAndSetter.create(context, API_PATH,this.toJSONObject(),success, error);
     }
 
-    private static Game fromJSONObject(JSONObject response) {
+    protected static Game fromJSONObject(JSONObject response) {
         return new Game(
                 response.optInt("id", -1),
                 response.optString("name", ""),
                 response.optString("date",""),
+                response.optString("time",""),
                 response.optInt("duration",1),
                 response.optInt("game_type", -1),
                 response.optInt("place", -1),
@@ -166,7 +170,7 @@ public class Game extends ModelGetterAndSetter {
                 error);
 
     }
-    private static ArrayList<Game> fromJSONArray(JSONArray response) {
+    public static ArrayList<Game> fromJSONArray(JSONArray response) {
         ArrayList<Game> pames = new ArrayList<Game>();
         for( int i = 0; i < response.length(); i++){
             try{
