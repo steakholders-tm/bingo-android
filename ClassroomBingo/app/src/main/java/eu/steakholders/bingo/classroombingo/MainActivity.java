@@ -269,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        System.out.println(new String(error.networkResponse.data));
 
                     }
                 });

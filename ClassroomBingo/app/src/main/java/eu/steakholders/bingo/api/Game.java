@@ -148,9 +148,12 @@ public class Game extends ModelGetterAndSetter {
     }
 
     private static ArrayList<Integer> tilesIdArrayListFromJSONArray(JSONArray tiles) {
+
         ArrayList<Integer> tileIds = new ArrayList<Integer>();
-        for(int i = 0; i < tiles.length(); i++){
-            tileIds.add(new Integer(tiles.optInt(i)));
+        if(tiles != null){
+            for(int i = 0; i < tiles.length(); i++){
+                tileIds.add(new Integer(tiles.optInt(i)));
+            }
         }
         return tileIds;
     }

@@ -78,7 +78,7 @@ public class Winner extends ModelGetterAndSetter {
         return new Winner(
                 response.optInt("id", -1),
                 response.optString("name", ""),
-                response.optInt("gameId", -1),
+                response.optInt("game", -1),
                 response.optString("time", "")
         );
     }
@@ -117,7 +117,8 @@ public class Winner extends ModelGetterAndSetter {
         JSONObject jOjct = new JSONObject();
         try {
             jOjct.put("name",this.name);
-            jOjct.put("gameId",this.gameId);
+            jOjct.put("game",this.gameId);
+            jOjct.put("time",this.time);
         } catch (JSONException e) {
             e.printStackTrace();
         }
