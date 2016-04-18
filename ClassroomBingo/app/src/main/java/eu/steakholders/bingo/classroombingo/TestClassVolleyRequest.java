@@ -26,7 +26,7 @@ public class TestClassVolleyRequest {
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Response: " + response.toString());
+
                     }
                 }, new Response.ErrorListener() {
 
