@@ -1,8 +1,8 @@
 package eu.steakholders.bingo.classroombingo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -16,21 +16,21 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import java.util.List;
 
 //https://steakholders.eu/api/v1/?format=api
 //https://steakholders.eu/api-docs/v1/api-docs
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import eu.steakholders.bingo.api.Game;
 import eu.steakholders.bingo.api.GameType;
 import eu.steakholders.bingo.api.Place;
 import eu.steakholders.bingo.api.PrimaryCategory;
 import eu.steakholders.bingo.api.SecondaryCategory;
-import eu.steakholders.bingo.api.Tile;
-import eu.steakholders.bingo.api.Winner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Elements in layout
     private Spinner gameTypeSpinner;
-    private Spinner objectSpinner;
+    private Spinner placeSpinner;
     private Spinner primaryCatSpinner;
     private Spinner secondaryCatSpinner;
     private ListView existingGames;
@@ -54,11 +54,19 @@ public class MainActivity extends AppCompatActivity {
     //Selected game to join
     private String gameName;
 
+    //Lists
+    private List<Object> gameTypesList;
+    private List<Object> placesList;
+    private List<Object> primaryList;
+    private List<Object> secondaryList;
+    private List<Object> existingGamesList;
+
     //Spinner arrays
-    private List<String> gameTypesList;
-    private List<String> placesList;
-    private List<String> primaryList;
-    private List<String> secondaryList;
+    private List<String> placesNames;
+    private List<String> gameNames;
+    private List<String> primaryNames;
+    private List<String> secondaryNames;
+    private List<String> existingGamesNames;
 
 
     @Override
@@ -71,9 +79,18 @@ public class MainActivity extends AppCompatActivity {
         //Init layout variable
         mainPage = (RelativeLayout) findViewById(R.id.main_frame);
 
+        //Init lists
+        placesNames = new ArrayList<>();
+        gameNames = new ArrayList<>();
+        primaryNames = new ArrayList<>();
+        secondaryNames = new ArrayList<>();
+        existingGamesNames = new ArrayList<>();
+
+        secondaryNames.add("None");
+
         //Init spinner variables
         gameTypeSpinner = (Spinner) findViewById(R.id.spinner_gt);
-        objectSpinner = (Spinner) findViewById(R.id.spinner_place);
+        placeSpinner = (Spinner) findViewById(R.id.spinner_place);
         primaryCatSpinner = (Spinner) findViewById(R.id.spinner_pc);
         secondaryCatSpinner = (Spinner) findViewById(R.id.spinner_sc);
 
@@ -81,9 +98,14 @@ public class MainActivity extends AppCompatActivity {
 
         existingGames.setOnItemClickListener(new ExistingGameListListener());
 
-    }
+        //Adding stuff to spinners and lists
+        addGameTypes(this);
+        addPlaces(this);
+        addPrimary(this);
+        addSecondary(this);
+        populateGameList(this);
 
-/*
+        /*
         Place.getById(this,1,  new Response.Listener<Object>() {
                     @Override
                     public void onResponse(Object object) {
@@ -252,6 +274,10 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println(error);
                     }
                 });*/
+    }
+
+
+
        /* Game game = new Game(1,"Tetst fromjava", "1993-12-27", "13:37",1,1,1,1,1,null );
 
         game.save(this,  new Response.Listener<Object>() {
@@ -405,24 +431,118 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void addGameTypes(){
-        //TODO add gametypes to spinner
+    public void addGameTypes(final Context context){
+        GameType.getAll(this, new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        gameTypesList = (ArrayList<Object>) object;
+                        for(Object o: gameTypesList){
+                            GameType temp = (GameType) o;
+                            gameNames.add(temp.getName());
+                            adapter = new ArrayAdapter<String>(context,
+                                    android.R.layout.simple_spinner_item, gameNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            gameTypeSpinner.setAdapter(adapter);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
     }
 
-    public void addPlaces(){
-        //TODO add objects to spinner
+    public void addPlaces(final Context context){
+        Place.getAll(this, new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        placesList = (ArrayList<Object>) object;
+                        for(Object o: placesList){
+                            Place temp = (Place) o;
+                            placesNames.add(temp.getName());
+                            adapter = new ArrayAdapter<String>(context,
+                                    android.R.layout.simple_spinner_item, placesNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            placeSpinner.setAdapter(adapter);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
     }
 
-    public void addPrimary(){
-        //TODO add pc to spinner
+    public void addPrimary(final Context context){
+        PrimaryCategory.getAll(this, new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        primaryList = (ArrayList<Object>) object;
+                        for(Object o: primaryList){
+                            PrimaryCategory temp = (PrimaryCategory) o;
+                            primaryNames.add(temp.getName());
+                            adapter = new ArrayAdapter<String>(context,
+                                    android.R.layout.simple_spinner_item, primaryNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            primaryCatSpinner.setAdapter(adapter);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
     }
 
-    public void addSecondary(){
-        //TODO add sc to spinner
+    public void addSecondary(final Context context){
+        SecondaryCategory.getAll(this, new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        secondaryList = (ArrayList<Object>) object;
+                        for(Object o: secondaryList){
+                            SecondaryCategory temp = (SecondaryCategory) o;
+                            secondaryNames.add(temp.getName());
+                            adapter = new ArrayAdapter<String>(context,
+                                    android.R.layout.simple_spinner_item, secondaryNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            secondaryCatSpinner.setAdapter(adapter);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
     }
 
-    public void populateGameList(){
-        //TODO populate gameList with items from server based on spinners
+    public void populateGameList(final Context context){
+        Game.getAll(this, new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        existingGamesList = (ArrayList<Object>) object;
+                        for(Object o: existingGamesList){
+                            Game temp = (Game) o;
+                            existingGamesNames.add(temp.getName());
+                            adapter = new ArrayAdapter<String>(context,
+                                    android.R.layout.simple_list_item_1, existingGamesNames);
+                            existingGames.setAdapter(adapter);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                });
     }
 
     public void setSelectedGameName(String gameName){
