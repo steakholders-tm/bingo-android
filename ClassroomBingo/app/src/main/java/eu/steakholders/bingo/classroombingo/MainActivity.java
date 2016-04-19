@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,9 +35,7 @@ import eu.steakholders.bingo.api.SecondaryCategory;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Fragments
-    private JoinGameFragment joinGameFragment;
-    private CreateGameFragment createGameFragment;
+    private static final String TAG = "DEBUG";
 
     //Layout variable
     private RelativeLayout mainPage;
@@ -50,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     //ArrayAdapter for spinners
     private ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> gameListAdapter;
 
     //Selected game to join
     private String gameName;
@@ -313,7 +313,8 @@ public class MainActivity extends AppCompatActivity {
     private class ExistingGameListListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            setSelectedGameName((String) existingGames.getItemAtPosition(position));
+            //TODO extend
+            setSelectedGameInfo((String) existingGames.getItemAtPosition(position));
         }
     }
 
@@ -348,9 +349,7 @@ public class MainActivity extends AppCompatActivity {
                 hideMain();
 
                 // Create a new Fragment to be placed in the activity layout
-                joinGameFragment = new JoinGameFragment();
-
-
+                JoinGameFragment joinGameFragment = new JoinGameFragment();
 
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments
@@ -388,7 +387,7 @@ public class MainActivity extends AppCompatActivity {
                 hideMain();
 
                 // Create a new Fragment to be placed in the activity layout
-                createGameFragment = new CreateGameFragment();
+                CreateGameFragment createGameFragment = new CreateGameFragment();
 
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments
@@ -431,6 +430,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void addGameTypes(final Context context){
         GameType.getAll(this, new Response.Listener<Object>() {
                     @Override
@@ -439,7 +439,7 @@ public class MainActivity extends AppCompatActivity {
                         for(Object o: gameTypesList){
                             GameType temp = (GameType) o;
                             gameNames.add(temp.getName());
-                            adapter = new ArrayAdapter<String>(context,
+                            adapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, gameNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             gameTypeSpinner.setAdapter(adapter);
@@ -449,11 +449,12 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
+                        Log.e(TAG, error.toString());
                     }
                 });
     }
 
+    @SuppressWarnings("unchecked")
     public void addPlaces(final Context context){
         Place.getAll(this, new Response.Listener<Object>() {
                     @Override
@@ -462,7 +463,7 @@ public class MainActivity extends AppCompatActivity {
                         for(Object o: placesList){
                             Place temp = (Place) o;
                             placesNames.add(temp.getName());
-                            adapter = new ArrayAdapter<String>(context,
+                            adapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, placesNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             placeSpinner.setAdapter(adapter);
@@ -472,11 +473,12 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
+                        Log.e(TAG, error.toString());
                     }
                 });
     }
 
+    @SuppressWarnings("unchecked")
     public void addPrimary(final Context context){
         PrimaryCategory.getAll(this, new Response.Listener<Object>() {
                     @Override
@@ -485,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
                         for(Object o: primaryList){
                             PrimaryCategory temp = (PrimaryCategory) o;
                             primaryNames.add(temp.getName());
-                            adapter = new ArrayAdapter<String>(context,
+                            adapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, primaryNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             primaryCatSpinner.setAdapter(adapter);
@@ -495,11 +497,12 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
+                        Log.e(TAG, error.toString());
                     }
                 });
     }
 
+    @SuppressWarnings("unchecked")
     public void addSecondary(final Context context){
         SecondaryCategory.getAll(this, new Response.Listener<Object>() {
                     @Override
@@ -508,7 +511,7 @@ public class MainActivity extends AppCompatActivity {
                         for(Object o: secondaryList){
                             SecondaryCategory temp = (SecondaryCategory) o;
                             secondaryNames.add(temp.getName());
-                            adapter = new ArrayAdapter<String>(context,
+                            adapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, secondaryNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             secondaryCatSpinner.setAdapter(adapter);
@@ -518,11 +521,12 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
+                        Log.e(TAG, error.toString());
                     }
                 });
     }
 
+    @SuppressWarnings("unchecked")
     public void populateGameList(final Context context){
         Game.getAll(this, new Response.Listener<Object>() {
                     @Override
@@ -531,35 +535,39 @@ public class MainActivity extends AppCompatActivity {
                         for(Object o: existingGamesList){
                             Game temp = (Game) o;
                             existingGamesNames.add(temp.getName());
-                            adapter = new ArrayAdapter<String>(context,
+                            //TODO change this
+                            gameListAdapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_list_item_1, existingGamesNames);
-                            existingGames.setAdapter(adapter);
+                            existingGames.setAdapter(gameListAdapter);
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
+                        Log.e(TAG, error.toString());
                     }
                 });
     }
 
-    public void setSelectedGameName(String gameName){
+    public void setSelectedGameInfo(String gameName){
         this.gameName = gameName;
     }
 
 
     //Check all the spinners if they are empty
     public boolean checkFields(String button){
-        if(button.equals("create")){
-            return true;
-        }else if(button.equals("join")){
-            if(gameName != null){
+        switch (button) {
+            case "create":
                 return true;
-            }
-        }else{
-            System.out.println("Something went wrong");
+            case "join":
+                if (gameName != null) {
+                    return true;
+                }
+                break;
+            default:
+                System.out.println("Something went wrong");
+                break;
         }
         Snackbar snackbar = Snackbar
                 .make(mainPage, "Did you select a game to join? If none exists consider creating your own!", Snackbar.LENGTH_LONG);
