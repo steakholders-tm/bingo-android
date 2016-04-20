@@ -163,7 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            filterGames();
+            if(gameTypeSpinner != null && gameTypeSpinner.getSelectedItem() != null &&
+                    placeSpinner != null && placeSpinner.getSelectedItem() != null &&
+                    primaryCatSpinner != null && primaryCatSpinner.getSelectedItem() != null &&
+                    secondaryCatSpinner != null && secondaryCatSpinner.getSelectedItem() != null){
+                filterGames();
+            }
+
         }
 
         @Override
@@ -260,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                 hideMain();
 
                 // Create a new Fragment to be placed in the activity layout
-               createGameFragment = new CreateGameFragment();
+                createGameFragment = new CreateGameFragment();
 
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments

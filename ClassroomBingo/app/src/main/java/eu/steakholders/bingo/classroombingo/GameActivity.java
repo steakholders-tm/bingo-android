@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +14,21 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+import eu.steakholders.bingo.api.Game;
+import eu.steakholders.bingo.api.Tile;
+
 public class GameActivity extends AppCompatActivity {
 
     private boolean overviewActive = false;
     private Animation openOverviewAnim;
     private Animation closeOverviewAnim;
     private FrameLayout overview;
+    private String nickname;
+    private Game game;
+    private ArrayList<TileButton> buttonTiles;
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -33,6 +43,29 @@ public class GameActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupFab();
+
+
+        buttonTiles = getTiles();
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+        for(int i = 0; i < 25; i++){
+            tiles.add(new Tile(0, "test " + i));
+        }
+
+        for(int j = 0; j < buttonTiles.size(); j++){
+            buttonTiles.get(j).setText(tiles.get(j).getName());
+        }
+    }
+
+    /**
+     * Takes in game and nickname and sets it up for further
+     * use in initializing the game
+     * @param game
+     * @param nickname
+     */
+    public void init( Game game, String nickname) {
+        this.nickname = nickname;
+        this.game = game;
+
 
     }
 
@@ -104,16 +137,47 @@ public class GameActivity extends AppCompatActivity {
      * Handles the animation and visibility of the overview
      */
     private void openOverview (){
+        overview.setVisibility(View.VISIBLE);
         overview.startAnimation(openOverviewAnim);
         overviewActive = true;
-        overview.setClickable(true);
     }
+
 
     private void closeOverview (){
         overview.startAnimation(closeOverviewAnim);
-        //overview.setVisibility(View.INVISIBLE);
+        overview.setVisibility(View.GONE);
         overviewActive = false;
-        overview.setClickable(false);
+    }
+
+    private ArrayList<Tile> shuffleTiles(ArrayList<Tile> tileList) {
+        Collections.shuffle(tileList);
+        return tileList;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private ArrayList<TileButton> getTiles(){
+        ArrayList<TileButton> tiles = new ArrayList<TileButton>();
+        System.out.println("\n\n\n\nwtf\n\n\n");
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 5; j++){
+                String id = "tile" + i + j;
+                String idMini = "tileSmall" + i + j;
+                System.out.println(idMini);
+                int resID = getResources().getIdentifier(id, "id", "eu.steakholders.bingo.classroombingo");
+                int resIDMini = getResources().getIdentifier(idMini, "id", "eu.steakholders.bingo.classroombingo");
+                System.out.println(resIDMini);
+                TileButton otherTile = (TileButton) findViewById(resIDMini);
+                TileButton bigTile = (TileButton) findViewById(resID);
+                bigTile.linkOtherTile(otherTile);
+                otherTile.linkOtherTile(bigTile);
+                tiles.add(bigTile);
+            }
+        }
+
+        return tiles;
     }
 
 }
