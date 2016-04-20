@@ -15,13 +15,10 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Collections;
 
 import eu.steakholders.bingo.api.Game;
 import eu.steakholders.bingo.api.Tile;
-=======
->>>>>>> df0ead3... Made button change color when pressed
 
 public class GameActivity extends AppCompatActivity {
 
@@ -29,12 +26,9 @@ public class GameActivity extends AppCompatActivity {
     private Animation openOverviewAnim;
     private Animation closeOverviewAnim;
     private FrameLayout overview;
-<<<<<<< HEAD
     private String nickname;
     private Game game;
-=======
     private ArrayList<Button> buttonTiles;
->>>>>>> df0ead3... Made button change color when pressed
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
