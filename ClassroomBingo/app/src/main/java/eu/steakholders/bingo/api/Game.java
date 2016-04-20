@@ -23,14 +23,14 @@ public class Game extends ModelGetterAndSetter implements Serializable{
     private int placeId;
     private int primaryCategoryId;
     private int secondaryCategoryId;
-    private ArrayList<Integer> tileIds;
+    private ArrayList<Tile> tiles;
 
 
     public Game(Context c) {
         super(c);
     }
 
-    public Game(int id, String name, String date, String time, int duration, int gameTypeId, int placeId, int primaryCategoryId, int secondaryCategoryId, ArrayList<Integer> tileIds) {
+    public Game(int id, String name, String date, String time, int duration, int gameTypeId, int placeId, int primaryCategoryId, int secondaryCategoryId, ArrayList<Tile> tiles) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -40,7 +40,7 @@ public class Game extends ModelGetterAndSetter implements Serializable{
         this.placeId = placeId;
         this.primaryCategoryId = primaryCategoryId;
         this.secondaryCategoryId = secondaryCategoryId;
-        this.tileIds = tileIds;
+        this.tiles = tiles;
     }
 
     public int getId() {
@@ -103,13 +103,6 @@ public class Game extends ModelGetterAndSetter implements Serializable{
         this.secondaryCategoryId = secondaryCategoryId;
     }
 
-    public ArrayList<Integer> getTileIds() {
-        return tileIds;
-    }
-
-    public void setTileIds(ArrayList<Integer> tileIds) {
-        this.tileIds = tileIds;
-    }
 
     private JSONObject toJSONObject(){
         JSONObject jOjct = new JSONObject();
@@ -122,7 +115,7 @@ public class Game extends ModelGetterAndSetter implements Serializable{
             jOjct.put("place",this.placeId);
             jOjct.put("primary_category",this.primaryCategoryId);
             jOjct.put("secondary_category",this.secondaryCategoryId);
-            jOjct.put("tiles",this.tileIds);
+            jOjct.put("tiles",this.tiles);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -144,19 +137,27 @@ public class Game extends ModelGetterAndSetter implements Serializable{
                 response.optInt("place", -1),
                 response.optInt("primary_category", -1),
                 response.optInt("secondary_category", -1),
-                tilesIdArrayListFromJSONArray(response.optJSONArray("tiles"))
+                tilesArrayListFromJSONArray(response.optJSONArray("tiles"))
         );
     }
 
-    private static ArrayList<Integer> tilesIdArrayListFromJSONArray(JSONArray tiles) {
-
-        ArrayList<Integer> tileIds = new ArrayList<Integer>();
+    private static ArrayList<Tile> tilesArrayListFromJSONArray(JSONArray tiles) {
+        System.out.println("tile");
+        System.out.println(tiles);
+        ArrayList<Tile> tiles_n = new ArrayList<Tile>();
         if(tiles != null){
             for(int i = 0; i < tiles.length(); i++){
-                tileIds.add(new Integer(tiles.optInt(i)));
+                try{
+                    System.out.print(tiles.getJSONObject(i).optString("name"));
+                    tiles_n.add(new Tile(tiles.getJSONObject(i).optInt("id"),tiles.getJSONObject(i).optString("name")));
+                }
+                catch(Exception e){
+                    System.out.println(e);
+                    System.out.println("tile failed");
+                }
             }
         }
-        return tileIds;
+        return tiles_n;
     }
 
     public static void getById(Context context, int id, final Response.Listener success , Response.ErrorListener error){
@@ -175,6 +176,7 @@ public class Game extends ModelGetterAndSetter implements Serializable{
 
     }
     public static ArrayList<Game> fromJSONArray(JSONArray response) {
+        System.out.println("from jsn array");
         ArrayList<Game> pames = new ArrayList<Game>();
         for( int i = 0; i < response.length(); i++){
             try{
@@ -182,6 +184,7 @@ public class Game extends ModelGetterAndSetter implements Serializable{
             }
             catch (Exception e){
                 System.out.println(e);
+                System.out.println("Game from json array failed");
             }
         }
         return pames;
@@ -199,5 +202,10 @@ public class Game extends ModelGetterAndSetter implements Serializable{
                     }
                 },
                 error);
+    }
+
+    public ArrayList<Tile> getTiles() {
+        System.out.println("get tiles");
+        return tiles;
     }
 }
