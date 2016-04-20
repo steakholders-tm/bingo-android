@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.List;
+
+import eu.steakholders.bingo.api.Game;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,17 +28,33 @@ public class CreateGameFragment extends Fragment {
     private Spinner secondarySpinner;
     private EditText dateInput;
     private EditText startTime;
-    private EditText duration;
+    private EditText durationInput;
 
     //Variables
-
+    private Game gameObject;
+    private int id = -1;
+    private String name;
+    private String date;
+    private String time;
+    private int duration;
+    private int gameTypeId;
+    private int placeId;
+    private int primaryCategoryId;
+    private int secondaryCategoryId;
+    private List<Integer> tileIds = null;
 
 
     public CreateGameFragment() {
         // Required empty public constructor
     }
 
-
+    /**
+     * Creates and inflates fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,5 +71,14 @@ public class CreateGameFragment extends Fragment {
         //TODO set all spinner values to the ones from the mainpage
 
     }
+
+    public void createGame(){
+
+    }
+
+    public Game getGame(){
+        return gameObject;
+    }
+
 
 }
