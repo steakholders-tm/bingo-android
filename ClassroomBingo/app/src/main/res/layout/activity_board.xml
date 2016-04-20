@@ -19,6 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView" >
+
         <HorizontalScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -36,7 +41,7 @@
                     android:layout_height="match_parent">
 
                     <eu.steakholders.bingo.classroombingo.TileButton
-                        android:text=",kjbglkhglglj hlk jhlkjh kjh  kh kljh kjh "
+                        android:text="Button"
                         android:id="@+id/tile00"
                         android:layout_column="0"
                         style="@style/GameTile"
@@ -272,6 +277,7 @@
             </TableLayout>
 
         </HorizontalScrollView>
+        </ScrollView>
 
 
         <!-- OVERVIEW -->
@@ -493,6 +499,6 @@
             </TableLayout>
         </FrameLayout>
 
-
     </FrameLayout>
+
 </LinearLayout>
