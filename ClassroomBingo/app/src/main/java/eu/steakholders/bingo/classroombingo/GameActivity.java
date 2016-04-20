@@ -13,12 +13,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import eu.steakholders.bingo.api.Game;
+
 public class GameActivity extends AppCompatActivity {
 
     private boolean overviewActive = false;
     private Animation openOverviewAnim;
     private Animation closeOverviewAnim;
     private FrameLayout overview;
+    private String nickname;
+    private Game game;
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -33,7 +37,17 @@ public class GameActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupFab();
+    }
 
+    /**
+     * Takes in game and nickname and sets it up for further
+     * use in initializing the game
+     * @param game
+     * @param nickname
+     */
+    public void init( Game game, String nickname) {
+        this.nickname = nickname;
+        this.game = game;
     }
 
     /**
