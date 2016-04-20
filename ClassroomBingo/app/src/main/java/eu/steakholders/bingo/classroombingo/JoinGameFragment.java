@@ -48,8 +48,8 @@ public class JoinGameFragment extends Fragment {
         this.gameName = gameName;
     }
 
-    public void setNickName(String nickName){
-        this.nickName = nickName;
+    public void setNickName(){
+        this.nickName = nickNameView.getText().toString();
     }
 
     public String getGameName(){

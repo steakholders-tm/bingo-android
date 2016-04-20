@@ -9,9 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game extends ModelGetterAndSetter {
+public class Game extends ModelGetterAndSetter implements Serializable{
     protected static String API_PATH = "games";
     private int id;
     private String name;
