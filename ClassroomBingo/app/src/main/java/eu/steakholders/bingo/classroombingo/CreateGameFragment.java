@@ -24,7 +24,7 @@ public class CreateGameFragment extends Fragment {
     private Spinner secondarySpinner;
     private EditText dateInput;
     private EditText startTime;
-    private EditText endTime;
+    private EditText duration;
 
     //Variables
 

@@ -36,14 +36,19 @@ import eu.steakholders.bingo.api.PrimaryCategory;
 import eu.steakholders.bingo.api.SecondaryCategory;
 
 public class MainActivity extends AppCompatActivity {
-
+    //Debug TAG for log
     private static final String TAG = "DEBUG";
+
+    //Fragments
+    private JoinGameFragment joinGameFragment;
+    private CreateGameFragment createGameFragment;
 
     //Layout variable
     private RelativeLayout mainPage;
 
     //Game object selected
-    private Game selectedGame;
+    private Game gameObject;
+    private String nickname;
 
     //Elements in layout
     private Spinner gameTypeSpinner;
@@ -137,211 +142,8 @@ public class MainActivity extends AppCompatActivity {
         addSecondary(this);
         getGameList(this);
 
-
-        /*
-        Place.getById(this,1,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        Place.getAll(this, new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        Game.getById(this,1,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        Game.getAll(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        GameType.getById(this,1,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        GameType.getAll(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        Tile.getById(this,1,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        Tile.getAll(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        Winner.getById(this,1,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        Winner.getAll(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        PrimaryCategory.getById(this,1,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        PrimaryCategory.getAll(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        SecondaryCategory.getById(this,1,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });
-        SecondaryCategory.getAll(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error);
-                    }
-                });*/
     }
 
-
-
-       /* Game game = new Game(1,"Tetst fromjava", "1993-12-27", "13:37",1,1,1,1,1,null );
-
-        game.save(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error.networkResponse);
-                        System.out.println(new String(error.networkResponse.data));
-                        System.out.println(error.getLocalizedMessage());
-                    }
-                });*/
-/*
-        Winner winner = new Winner("Dag", 1, "2016-04-13T20:58:19Z");
-        winner.save(this,  new Response.Listener<Object>() {
-                    @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Response: " + object.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(new String(error.networkResponse.data));
-
-                    }
-                });*/
 
     /**
      * Private listener class for game listView
@@ -414,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                 hideMain();
 
                 // Create a new Fragment to be placed in the activity layout
-                JoinGameFragment joinGameFragment = new JoinGameFragment();
+                joinGameFragment = new JoinGameFragment();
 
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments
@@ -436,14 +238,11 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void joinGame(View view){
+        joinGameFragment.setNickName();
+        nickname = joinGameFragment.getNickName();
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("GAME_NAME", gameName);
-        /* Not sure what other data needed to send
-        intent.putExtra();
-        intent.putExtra();
-        intent.putExtra();
-        intent.putExtra();
-        */
+        intent.putExtra("GAME_OBJECT", gameObject);
+        intent.putExtra("NICKNAME", nickname);
         startActivity(intent);
     }
 
@@ -460,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                 hideMain();
 
                 // Create a new Fragment to be placed in the activity layout
-                CreateGameFragment createGameFragment = new CreateGameFragment();
+               createGameFragment = new CreateGameFragment();
 
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments
@@ -484,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO join and create game to server
 
 
-        joinGame(view);
+        goToJoinGame(view);
     }
 
     /**
@@ -535,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
                                     android.R.layout.simple_spinner_item, gameNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             gameTypeSpinner.setAdapter(adapter);
-                            Log.d(TAG, gameTypeMap.toString());
+                            //Log.d(TAG, gameTypeMap.toString());
                         }
                     }
                 },
@@ -565,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
                                     android.R.layout.simple_spinner_item, placesNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             placeSpinner.setAdapter(adapter);
-                            Log.d(TAG, placesMap.toString());
+                            //Log.d(TAG, placesMap.toString());
                         }
                     }
                 },
@@ -595,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
                                     android.R.layout.simple_spinner_item, primaryNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             primaryCatSpinner.setAdapter(adapter);
-                            Log.d(TAG, primaryMap.toString());
+                            //Log.d(TAG, primaryMap.toString());
                         }
                     }
                 },
@@ -625,7 +424,7 @@ public class MainActivity extends AppCompatActivity {
                                     android.R.layout.simple_spinner_item, secondaryNames);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             secondaryCatSpinner.setAdapter(adapter);
-                            Log.d(TAG, secondaryMap.toString());
+                            //Log.d(TAG, secondaryMap.toString());
                         }
                     }
                 },
@@ -651,7 +450,7 @@ public class MainActivity extends AppCompatActivity {
                             Game temp = (Game) o;
                             existingGames.add(temp);
                             existingGamesMap.put(temp.getName(), temp);
-                            Log.d(TAG, existingGames.toString());
+                            //Log.d(TAG, existingGames.toString());
                         }
                     }
                 },
@@ -703,7 +502,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void setSelectedGameInfo(String gameName){
         this.gameName = gameName;
-        this.selectedGame = existingGamesMap.get(gameName);
+        this.gameObject = existingGamesMap.get(gameName);
     }
 
 

@@ -14,7 +14,7 @@
     <string name="name">Name*:</string>
     <string name="date">Date*:</string>
     <string name="start">Start*:</string>
-    <string name="end">End*:</string>
+    <string name="duration">Duration in hours*:</string>
 
     <!--String res for JoinGameFragment-->
     <string name="placeholder">Placeholder</string>
