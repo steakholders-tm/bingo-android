@@ -13,7 +13,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import eu.steakholders.bingo.api.Game;
+import eu.steakholders.bingo.api.Tile;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -48,6 +52,7 @@ public class GameActivity extends AppCompatActivity {
     public void init( Game game, String nickname) {
         this.nickname = nickname;
         this.game = game;
+
     }
 
     /**
@@ -128,6 +133,12 @@ public class GameActivity extends AppCompatActivity {
         //overview.setVisibility(View.INVISIBLE);
         overviewActive = false;
         overview.setClickable(false);
+    }
+
+
+    private ArrayList<Tile> shuffleTiles(ArrayList<Tile> tileList){
+        Collections.shuffle(tileList);
+        return tileList;
     }
 
 }
