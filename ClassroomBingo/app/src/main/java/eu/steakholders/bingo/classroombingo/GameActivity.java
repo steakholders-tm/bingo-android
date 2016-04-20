@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +14,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
+
 public class GameActivity extends AppCompatActivity {
 
     private boolean overviewActive = false;
     private Animation openOverviewAnim;
     private Animation closeOverviewAnim;
     private FrameLayout overview;
+    private ArrayList<Button> buttonTiles;
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -33,6 +37,8 @@ public class GameActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupFab();
+
+        buttonTiles = getTiles();
 
     }
 
@@ -109,11 +115,30 @@ public class GameActivity extends AppCompatActivity {
         overview.setClickable(true);
     }
 
+
     private void closeOverview (){
         overview.startAnimation(closeOverviewAnim);
         //overview.setVisibility(View.INVISIBLE);
         overviewActive = false;
         overview.setClickable(false);
+    }
+
+    /**
+     *
+     * @return
+     */
+    private ArrayList<Button> getTiles(){
+        ArrayList<Button> tiles = new ArrayList<Button>();
+
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 5; j++){
+                String id = "tile" + i + j;
+                int resID = getResources().getIdentifier(id, "id", "eu.steakholders.bingo.classroombingo");
+                tiles.add((Button) findViewById(resID));
+            }
+        }
+
+        return tiles;
     }
 
 }
