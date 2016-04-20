@@ -1,5 +1,6 @@
 package eu.steakholders.bingo.classroombingo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,11 +46,13 @@ public class GameActivity extends AppCompatActivity {
         setupFab();
 
 
+        Intent intent = getIntent();
+        String nickname = intent.getStringExtra(MainActivity.NICKNAME);
+        Game game  = (Game) intent.getSerializableExtra(MainActivity.GAME_OBJECT);
+        System.out.println(game.getName());
+
         buttonTiles = getTiles();
-        ArrayList<Tile> tiles = new ArrayList<Tile>();
-        for(int i = 0; i < 25; i++){
-            tiles.add(new Tile(0, "test " + i));
-        }
+        ArrayList<Tile> tiles = game.getTiles();
 
         for(int j = 0; j < buttonTiles.size(); j++){
             buttonTiles.get(j).setText(tiles.get(j).getName());
@@ -161,15 +164,12 @@ public class GameActivity extends AppCompatActivity {
      */
     private ArrayList<TileButton> getTiles(){
         ArrayList<TileButton> tiles = new ArrayList<TileButton>();
-        System.out.println("\n\n\n\nwtf\n\n\n");
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 5; j++){
                 String id = "tile" + i + j;
                 String idMini = "tileSmall" + i + j;
-                System.out.println(idMini);
                 int resID = getResources().getIdentifier(id, "id", "eu.steakholders.bingo.classroombingo");
                 int resIDMini = getResources().getIdentifier(idMini, "id", "eu.steakholders.bingo.classroombingo");
-                System.out.println(resIDMini);
                 TileButton otherTile = (TileButton) findViewById(resIDMini);
                 TileButton bigTile = (TileButton) findViewById(resID);
                 bigTile.linkOtherTile(otherTile);

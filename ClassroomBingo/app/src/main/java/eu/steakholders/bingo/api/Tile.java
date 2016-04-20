@@ -7,9 +7,10 @@ import com.android.volley.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tile extends ModelGetter {
+public class Tile extends ModelGetter implements Serializable {
     protected static String API_PATH = "tiles";
     private int id;
     private String name;
