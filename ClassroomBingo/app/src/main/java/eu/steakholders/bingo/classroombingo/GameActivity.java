@@ -137,17 +137,16 @@ public class GameActivity extends AppCompatActivity {
      * Handles the animation and visibility of the overview
      */
     private void openOverview (){
+        overview.setVisibility(View.VISIBLE);
         overview.startAnimation(openOverviewAnim);
         overviewActive = true;
-        overview.setClickable(true);
     }
 
 
     private void closeOverview (){
         overview.startAnimation(closeOverviewAnim);
-        //overview.setVisibility(View.INVISIBLE);
+        overview.setVisibility(View.GONE);
         overviewActive = false;
-        overview.setClickable(false);
     }
 
     private ArrayList<Tile> shuffleTiles(ArrayList<Tile> tileList) {
