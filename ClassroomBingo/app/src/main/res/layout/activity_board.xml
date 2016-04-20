@@ -31,48 +31,55 @@
 
                 <!-- Row 0 -->
                 <TableRow
+                    android:baselineAligned="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <eu.steakholders.bingo.classroombingo.TileButton
-                        android:text="Button"
+                        android:text=",kjbglkhglglj hlk jhlkjh kjh  kh kljh kjh "
                         android:id="@+id/tile00"
                         android:layout_column="0"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile01"
                         android:layout_column="1"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile02"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile03"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile04"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
                 </TableRow>
 
                 <!-- Row 1 -->
 
                 <TableRow
+                    android:baselineAligned="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -81,40 +88,46 @@
                         android:id="@+id/tile10"
                         android:layout_column="0"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile11"
                         android:layout_column="1"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile12"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile13"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile14"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
                 </TableRow>
 
                 <!-- Row 2 -->
 
                 <TableRow
+                    android:baselineAligned="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -123,40 +136,46 @@
                         android:id="@+id/tile20"
                         android:layout_column="0"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile21"
                         android:layout_column="1"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile22"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile23"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile24"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
                 </TableRow>
 
                 <!-- Row 3 -->
 
                 <TableRow
+                    android:baselineAligned="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -165,40 +184,46 @@
                         android:id="@+id/tile30"
                         android:layout_column="0"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile31"
                         android:layout_column="1"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile32"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile33"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile34"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
                 </TableRow>
 
                 <!-- Row 4 -->
 
                 <TableRow
+                    android:baselineAligned="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -207,35 +232,40 @@
                         android:id="@+id/tile40"
                         android:layout_column="0"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile41"
                         android:layout_column="1"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile42"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile43"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
 
                     <eu.steakholders.bingo.classroombingo.TileButton
                         android:text="Button"
                         android:id="@+id/tile44"
                         android:layout_column="2"
                         style="@style/GameTile"
-                        android:background="@drawable/button_tile" />
+                        android:background="@drawable/button_tile"
+                        android:padding="20dp" />
                 </TableRow>
 
 
@@ -289,7 +319,7 @@
                         android:text="Card"
                         android:id="@+id/tileSmall01"
                         android:layout_column="1"
-                        style="@style/GameTileSmall"                         
+                        style="@style/GameTileSmall"
                         android:background="@drawable/button_tile"/>
 
                     <eu.steakholders.bingo.classroombingo.TileButton
