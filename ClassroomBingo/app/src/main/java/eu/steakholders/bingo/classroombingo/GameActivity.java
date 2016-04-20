@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,10 +15,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Collections;
 
 import eu.steakholders.bingo.api.Game;
 import eu.steakholders.bingo.api.Tile;
+=======
+>>>>>>> df0ead3... Made button change color when pressed
 
 public class GameActivity extends AppCompatActivity {
 
@@ -25,8 +29,12 @@ public class GameActivity extends AppCompatActivity {
     private Animation openOverviewAnim;
     private Animation closeOverviewAnim;
     private FrameLayout overview;
+<<<<<<< HEAD
     private String nickname;
     private Game game;
+=======
+    private ArrayList<Button> buttonTiles;
+>>>>>>> df0ead3... Made button change color when pressed
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -52,6 +60,8 @@ public class GameActivity extends AppCompatActivity {
     public void init( Game game, String nickname) {
         this.nickname = nickname;
         this.game = game;
+
+        buttonTiles = getTiles();
 
     }
 
@@ -128,6 +138,7 @@ public class GameActivity extends AppCompatActivity {
         overview.setClickable(true);
     }
 
+
     private void closeOverview (){
         overview.startAnimation(closeOverviewAnim);
         //overview.setVisibility(View.INVISIBLE);
@@ -135,10 +146,27 @@ public class GameActivity extends AppCompatActivity {
         overview.setClickable(false);
     }
 
-
-    private ArrayList<Tile> shuffleTiles(ArrayList<Tile> tileList){
+    private ArrayList<Tile> shuffleTiles(ArrayList<Tile> tileList) {
         Collections.shuffle(tileList);
         return tileList;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private ArrayList<Button> getTiles(){
+        ArrayList<Button> tiles = new ArrayList<Button>();
+
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 5; j++){
+                String id = "tile" + i + j;
+                int resID = getResources().getIdentifier(id, "id", "eu.steakholders.bingo.classroombingo");
+                tiles.add((Button) findViewById(resID));
+            }
+        }
+
+        return tiles;
     }
 
 }
