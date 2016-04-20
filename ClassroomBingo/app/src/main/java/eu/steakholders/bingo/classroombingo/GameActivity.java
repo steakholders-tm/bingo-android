@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     private FrameLayout overview;
     private String nickname;
     private Game game;
-    private ArrayList<Button> buttonTiles;
+    private ArrayList<TileButton> buttonTiles;
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -43,6 +43,17 @@ public class GameActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupFab();
+
+
+        buttonTiles = getTiles();
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+        for(int i = 0; i < 25; i++){
+            tiles.add(new Tile(0, "test " + i));
+        }
+
+        for(int j = 0; j < buttonTiles.size(); j++){
+            buttonTiles.get(j).setText(tiles.get(j).getName());
+        }
     }
 
     /**
@@ -55,7 +66,6 @@ public class GameActivity extends AppCompatActivity {
         this.nickname = nickname;
         this.game = game;
 
-        buttonTiles = getTiles();
 
     }
 
@@ -149,14 +159,22 @@ public class GameActivity extends AppCompatActivity {
      *
      * @return
      */
-    private ArrayList<Button> getTiles(){
-        ArrayList<Button> tiles = new ArrayList<Button>();
-
+    private ArrayList<TileButton> getTiles(){
+        ArrayList<TileButton> tiles = new ArrayList<TileButton>();
+        System.out.println("\n\n\n\nwtf\n\n\n");
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 5; j++){
                 String id = "tile" + i + j;
+                String idMini = "tileSmall" + i + j;
+                System.out.println(idMini);
                 int resID = getResources().getIdentifier(id, "id", "eu.steakholders.bingo.classroombingo");
-                tiles.add((Button) findViewById(resID));
+                int resIDMini = getResources().getIdentifier(idMini, "id", "eu.steakholders.bingo.classroombingo");
+                System.out.println(resIDMini);
+                TileButton otherTile = (TileButton) findViewById(resIDMini);
+                TileButton bigTile = (TileButton) findViewById(resID);
+                bigTile.linkOtherTile(otherTile);
+                otherTile.linkOtherTile(bigTile);
+                tiles.add(bigTile);
             }
         }
 

@@ -10,6 +10,7 @@ public class TileButton extends Button implements OnClickListener{
 
     private boolean isClicked = false;
     private int pressed_color = Color.MAGENTA;
+    private TileButton otherTile;
 
     public TileButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -32,15 +33,23 @@ public class TileButton extends Button implements OnClickListener{
 
     @Override
     public void onClick(View v) {
+        this.otherTile.click();
+        click();
+    }
+
+    public void click(){
         if(isClicked){
             this.setBackgroundResource(android.R.drawable.btn_default);
             isClicked = false;
         }
-        else{
+        else {
             this.setBackgroundColor(pressed_color);
             isClicked = true;
         }
     }
 
 
+    public void linkOtherTile(TileButton otherTile) {
+        this.otherTile = otherTile;
+    }
 }
