@@ -38,12 +38,15 @@ public class TileButton extends Button implements OnClickListener{
     }
 
     public void click(){
+
         if(isClicked){
-            this.setBackgroundResource(android.R.drawable.btn_default);
+            this.setBackgroundResource(R.drawable.button_tile);
+            //this.setbac
             isClicked = false;
         }
-        else {
-            this.setBackgroundColor(pressed_color);
+        else{
+            this.setBackgroundResource(R.drawable.button_tile_clicked);
+            //this.setBackgroundColor(pressed_color);
             isClicked = true;
         }
     }
