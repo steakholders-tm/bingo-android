@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private JoinGameFragment joinGameFragment;
     private CreateGameFragment createGameFragment;
 
+    public static final String  GAME_OBJECT = "gameobject";
+    public static final String NICKNAME = "nickname";
+
     //Layout variable
     private RelativeLayout mainPage;
 
@@ -248,8 +251,8 @@ public class MainActivity extends AppCompatActivity {
         joinGameFragment.setNickName();
         nickname = joinGameFragment.getNickName();
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("GAME_OBJECT", gameObject);
-        intent.putExtra("NICKNAME", nickname);
+        intent.putExtra(MainActivity.GAME_OBJECT, gameObject);
+        intent.putExtra(MainActivity.NICKNAME, nickname);
         startActivity(intent);
     }
 
