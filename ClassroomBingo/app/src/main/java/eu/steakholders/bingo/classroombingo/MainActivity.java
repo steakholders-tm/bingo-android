@@ -61,7 +61,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView existingGamesListView;
 
     //ArrayAdapter for spinners
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> gameTypeAdapter;
+    private ArrayAdapter<String> placeAdapter;
+    private ArrayAdapter<String> primaryAdapter;
+    private ArrayAdapter<String> secondaryAdapter;
     private ArrayAdapter<String> gameListAdapter;
 
     //Selected game to join
@@ -89,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
     private Map<String, Integer> secondaryMap;
     private Map<String, Game> existingGamesMap;
 
+    //Selected items in spinners
+    private String selectedGameType;
+    private String selectedPlace;
+    private String selectedPrimary;
+    private String selectedSecondary;
+
     /**
      * Initializes all dropdowns, lists, maps and gets info from the server
      *
@@ -112,16 +121,12 @@ public class MainActivity extends AppCompatActivity {
         existingGames = new ArrayList<>();
         //filteredGameNames = new ArrayList<>();
 
-        secondaryNames.add("None");
-
         //Init maps
         gameTypeMap = new HashMap<>();
         placesMap = new HashMap<>();
         primaryMap = new HashMap<>();
         secondaryMap = new HashMap<>();
         existingGamesMap = new HashMap<>();
-
-        secondaryMap.put("None", 0);
 
         //Init spinner variables
         gameTypeSpinner = (Spinner) findViewById(R.id.spinner_gt);
@@ -145,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         addPrimary(this);
         addSecondary(this);
         getGameList(this);
+
 
     }
 
@@ -271,6 +277,21 @@ public class MainActivity extends AppCompatActivity {
                 // Create a new Fragment to be placed in the activity layout
                 createGameFragment = new CreateGameFragment();
 
+                //Transfer data
+                createGameFragment.setGameNames(gameNames);
+                createGameFragment.setPlacesNames(placesNames);
+                createGameFragment.setPrimaryNames(primaryNames);
+                createGameFragment.setSecondaryNames(secondaryNames);
+                createGameFragment.setGameTypeMap(gameTypeMap);
+                createGameFragment.setPlacesMap(placesMap);
+                createGameFragment.setPrimaryMap(primaryMap);
+                createGameFragment.setSecondaryMap(secondaryMap);
+
+                createGameFragment.setSelectedGameTypePos(gameTypeAdapter.getPosition(gameTypeSpinner.getSelectedItem().toString()));
+                createGameFragment.setSelectedPlacePos(placeAdapter.getPosition(placeSpinner.getSelectedItem().toString()));
+                createGameFragment.setSelectedPrimaryPos(primaryAdapter.getPosition(primaryCatSpinner.getSelectedItem().toString()));
+                createGameFragment.setSelectedSecondaryPos(secondaryAdapter.getPosition(secondaryCatSpinner.getSelectedItem().toString()));
+
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments
                 createGameFragment.setArguments(getIntent().getExtras());
@@ -289,11 +310,35 @@ public class MainActivity extends AppCompatActivity {
      * Creates new game and sends to server, then runs joinGame()
      * @param view
      */
-    public void newGame(View view){
-        //TODO join and create game to server
+    public void newGame(final View view){
+
+        createGameFragment.makeGame();
+
+        if(createGameFragment.getFlag()){
+            gameObject = createGameFragment.getGame();
+            gameName = gameObject.getName();
+            gameObject.save(this,  new Response.Listener<Object>() {
+                        @Override
+                        public void onResponse(Object object) {
+                            gameObject = (Game) object;
+                            Log.d(TAG, object.toString());
+                            goToJoinGame(view);
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e(TAG, error.toString());
+                            Snackbar snackbar = Snackbar
+                                    .make(mainPage, "Please fill in all the fields correctly!", Snackbar.LENGTH_LONG);
+                            snackbar.show();
+                        }
+                    });
 
 
-        goToJoinGame(view);
+        }
+
     }
 
     /**
@@ -340,10 +385,10 @@ public class MainActivity extends AppCompatActivity {
                             GameType temp = (GameType) o;
                             gameNames.add(temp.getName());
                             gameTypeMap.put(temp.getName(), temp.getId());
-                            adapter = new ArrayAdapter<>(context,
+                            gameTypeAdapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, gameNames);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            gameTypeSpinner.setAdapter(adapter);
+                            gameTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            gameTypeSpinner.setAdapter(gameTypeAdapter);
                             //Log.d(TAG, gameTypeMap.toString());
                         }
                     }
@@ -370,10 +415,10 @@ public class MainActivity extends AppCompatActivity {
                             Place temp = (Place) o;
                             placesNames.add(temp.getName());
                             placesMap.put(temp.getName(), temp.getId());
-                            adapter = new ArrayAdapter<>(context,
+                            placeAdapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, placesNames);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            placeSpinner.setAdapter(adapter);
+                            placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            placeSpinner.setAdapter(placeAdapter);
                             //Log.d(TAG, placesMap.toString());
                         }
                     }
@@ -400,10 +445,10 @@ public class MainActivity extends AppCompatActivity {
                             PrimaryCategory temp = (PrimaryCategory) o;
                             primaryNames.add(temp.getName());
                             primaryMap.put(temp.getName(), temp.getId());
-                            adapter = new ArrayAdapter<>(context,
+                            primaryAdapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, primaryNames);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            primaryCatSpinner.setAdapter(adapter);
+                            primaryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            primaryCatSpinner.setAdapter(primaryAdapter);
                             //Log.d(TAG, primaryMap.toString());
                         }
                     }
@@ -430,10 +475,10 @@ public class MainActivity extends AppCompatActivity {
                             SecondaryCategory temp = (SecondaryCategory) o;
                             secondaryNames.add(temp.getName());
                             secondaryMap.put(temp.getName(), temp.getId());
-                            adapter = new ArrayAdapter<>(context,
+                            secondaryAdapter = new ArrayAdapter<>(context,
                                     android.R.layout.simple_spinner_item, secondaryNames);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            secondaryCatSpinner.setAdapter(adapter);
+                            secondaryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            secondaryCatSpinner.setAdapter(secondaryAdapter);
                             //Log.d(TAG, secondaryMap.toString());
                         }
                     }
@@ -444,6 +489,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.e(TAG, error.toString());
                     }
                 });
+
     }
 
     /**
@@ -461,6 +507,12 @@ public class MainActivity extends AppCompatActivity {
                             existingGames.add(temp);
                             existingGamesMap.put(temp.getName(), temp);
                             //Log.d(TAG, existingGames.toString());
+                            if(gameTypeSpinner != null && gameTypeSpinner.getSelectedItem() != null &&
+                                    placeSpinner != null && placeSpinner.getSelectedItem() != null &&
+                                    primaryCatSpinner != null && primaryCatSpinner.getSelectedItem() != null &&
+                                    secondaryCatSpinner != null && secondaryCatSpinner.getSelectedItem() != null){
+                                filterGames();
+                            }
                         }
                     }
                 },
@@ -477,20 +529,15 @@ public class MainActivity extends AppCompatActivity {
      */
     public void filterGames(){
         filteredGameNames = new ArrayList<>();
-        String selectedGameType = gameTypeSpinner.getSelectedItem().toString();
-        String selectedPlace = placeSpinner.getSelectedItem().toString();
-        String selectedPrimary = primaryCatSpinner.getSelectedItem().toString();
-        String selectedSecondary = secondaryCatSpinner.getSelectedItem().toString();
+        selectedGameType = gameTypeSpinner.getSelectedItem().toString();
+        selectedPlace = placeSpinner.getSelectedItem().toString();
+        selectedPrimary = primaryCatSpinner.getSelectedItem().toString();
+        selectedSecondary = secondaryCatSpinner.getSelectedItem().toString();
 
         int gameTypeID = gameTypeMap.get(selectedGameType);
         int placeID = placesMap.get(selectedPlace);
         int primaryID = primaryMap.get(selectedPrimary);
-        int secondaryID;
-        if(selectedSecondary.equals("None")){
-            secondaryID = -1;
-        }else{
-            secondaryID = secondaryMap.get(selectedSecondary);
-        }
+        int secondaryID = secondaryMap.get(selectedSecondary);
 
 
         for(Game g: existingGames){
@@ -498,7 +545,7 @@ public class MainActivity extends AppCompatActivity {
                     g.getGameTypeId() == gameTypeID &&
                     g.getPrimaryCategoryId() == primaryID &&
                     g.getSecondaryCategoryId() == secondaryID ){
-                filteredGameNames.add(g.getName());
+                    filteredGameNames.add(g.getName());
             }
         }
         gameListAdapter = new ArrayAdapter<>(this,
@@ -514,7 +561,6 @@ public class MainActivity extends AppCompatActivity {
         this.gameName = gameName;
         this.gameObject = existingGamesMap.get(gameName);
     }
-
 
     /**
      * Check if any info is missing

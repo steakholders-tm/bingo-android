@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateGameFragment">
+    tools:context=".CreateGameFragment"
+    android:id="@+id/parent">
 
 
     <LinearLayout
@@ -97,7 +98,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/game_name_input"
-            android:inputType="text" />
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="@string/name_hint"/>
 
         <Spinner
             android:layout_width="match_parent"
@@ -121,7 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:id="@+id/create_spinner_sc"
-            android:spinnerMode="dropdown"/>
+            android:spinnerMode="dropdown"
+            android:layout_marginBottom="10dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -129,21 +133,26 @@
             android:inputType="date"
             android:ems="10"
             android:id="@+id/create_game_date_field"
-            />
+            android:singleLine="true"
+            android:hint="@string/date_hint"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="time"
             android:ems="10"
-            android:id="@+id/create_start_time_field" />
+            android:id="@+id/create_start_time_field"
+            android:singleLine="true"
+            android:hint="@string/start_time_hint"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="time"
             android:ems="10"
-            android:id="@+id/create_end_time_field" />
+            android:id="@+id/create_duration"
+            android:singleLine="true"
+            android:inputType="number"
+            android:hint="@string/duration_hint"/>
 
     </LinearLayout>
 
