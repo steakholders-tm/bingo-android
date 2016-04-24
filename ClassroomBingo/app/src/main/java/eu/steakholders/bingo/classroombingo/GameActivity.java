@@ -2,6 +2,7 @@ package eu.steakholders.bingo.classroombingo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,8 @@ public class GameActivity extends AppCompatActivity {
     private Game game;
     private ArrayList<TileButton> buttonTiles;
     private ArrayList<ArrayList<Boolean>> clickedTiles;
+    private boolean showTileNumbers = false;
+    private Integer numberOfWinners = null;
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -57,22 +60,49 @@ public class GameActivity extends AppCompatActivity {
         Game game  = (Game) intent.getSerializableExtra(MainActivity.GAME_OBJECT);
         populateTiles(game);
         init(game, nickname);
-        game.getWinners(this,  new Response.Listener<Object>() {
+        startGetWinners();
+
+    }
+
+    private void startGetWinners() {
+        final Handler h = new Handler();
+        final int delay_in_ms = 5000;
+
+        h.postDelayed(new Runnable(){
+            public void run(){
+                getWinners();
+                h.postDelayed(this, delay_in_ms);
+            }
+        }, delay_in_ms);
+    }
+
+    private void getWinners() {
+        game.getWinners(this,  new Response.Listener<ArrayList<Winner>>() {
                     @Override
-                    public void onResponse(Object object) {
-                        System.out.println("Got winners");
-                        System.out.println(object);
+                    public void onResponse(ArrayList<Winner> winners) {
+                        winnersCallBack(winners);
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println("did not get winners");
-                        System.out.println(error);
-
                     }
                 });
+    }
+
+    private void winnersCallBack(ArrayList<Winner> winners) {
+        if(numberOfWinners == null){
+            numberOfWinners = winners.size();
+        }
+        if(numberOfWinners < winners.size()){
+            Winner win = winners.get(winners.size() - 1);
+            numberOfWinners = winners.size();
+            if( win.getName() != nickname){
+                Snackbar snackbar = Snackbar.make(overview, win.getName() + " got Bingo!", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        }
     }
 
 
@@ -84,9 +114,13 @@ public class GameActivity extends AppCompatActivity {
         buttonTiles = getTiles();
         ArrayList<Tile> tiles = game.getTiles();
         tiles = shuffleTiles(tiles);
+        String prefix = "";
 
         for(int j = 0; j < buttonTiles.size(); j++){
-            buttonTiles.get(j).setText(tiles.get(j).getName());
+            if(showTileNumbers){
+                prefix = "" + (j + 1) + ". ";
+            }
+            buttonTiles.get(j).setText( prefix + tiles.get(j).getName());
         }
     }
 
@@ -207,6 +241,9 @@ public class GameActivity extends AppCompatActivity {
                 bigTile.setXY(x,y);
                 bigTile.linkOtherTile(otherTile);
                 otherTile.linkOtherTile(bigTile);
+                if(showTileNumbers){
+                    otherTile.setText("" + ((y*5)+(x+1)));
+                }
                 tiles.add(bigTile);
                 clickedTiles.get(y).add(false);
             }
