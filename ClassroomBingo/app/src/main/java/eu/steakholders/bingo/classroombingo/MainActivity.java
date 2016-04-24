@@ -3,6 +3,7 @@ package eu.steakholders.bingo.classroombingo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -106,6 +107,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.fragment_splash);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                init();
+            }
+        }, 3000);
+
+
+
+    }
+
+
+    private void init()  {
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -150,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
         addPrimary(this);
         addSecondary(this);
         getGameList(this);
-
 
     }
 
