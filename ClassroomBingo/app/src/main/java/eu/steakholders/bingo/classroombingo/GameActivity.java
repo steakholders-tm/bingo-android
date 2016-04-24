@@ -1,9 +1,11 @@
 package eu.steakholders.bingo.classroombingo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -224,5 +226,26 @@ public class GameActivity extends AppCompatActivity {
             Snackbar snackbar = Snackbar.make(overview, "You ("+nickname+ ") won!", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
+    }
+
+    /**
+     * Override back button to work with fragments
+     */
+    @Override
+    public void onBackPressed(){
+        new AlertDialog.Builder(this)
+                .setTitle("Exit game?")
+                .setMessage("Are you sure you want to exit the game?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                })
+                .show();
     }
 }
