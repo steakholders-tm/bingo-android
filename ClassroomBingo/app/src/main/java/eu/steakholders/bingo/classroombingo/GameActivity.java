@@ -37,7 +37,7 @@ public class GameActivity extends AppCompatActivity {
     private Game game;
     private ArrayList<TileButton> buttonTiles;
     private ArrayList<ArrayList<Boolean>> clickedTiles;
-    private boolean showTileNumbers = false;
+    private boolean showTileNumbers = true;
     private Integer numberOfWinners = null;
 
     /**
