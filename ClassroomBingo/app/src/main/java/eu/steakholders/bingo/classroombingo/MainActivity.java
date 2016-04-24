@@ -302,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
                 createGameFragment = new CreateGameFragment();
 
                 //Transfer data
+                createGameFragment.setFlag();
                 createGameFragment.setGameNames(gameNames);
                 createGameFragment.setPlacesNames(placesNames);
                 createGameFragment.setPrimaryNames(primaryNames);
@@ -359,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
                             snackbar.show();
                         }
                     });
-
+            getGameList(this);
 
         }
 
@@ -522,6 +523,9 @@ public class MainActivity extends AppCompatActivity {
      */
     @SuppressWarnings("unchecked")
     public void getGameList(final Context context){
+        existingGameList = new ArrayList<>();
+        existingGames = new ArrayList<>();
+        existingGamesMap = new HashMap<>();
         Game.getAll(this, new Response.Listener<Object>() {
                     @Override
                     public void onResponse(Object object) {
@@ -563,15 +567,26 @@ public class MainActivity extends AppCompatActivity {
         int primaryID = primaryMap.get(selectedPrimary);
         int secondaryID = secondaryMap.get(selectedSecondary);
 
-
-        for(Game g: existingGames){
-            if(g.getPlaceId() == placeID &&
-                    g.getGameTypeId() == gameTypeID &&
-                    g.getPrimaryCategoryId() == primaryID &&
-                    g.getSecondaryCategoryId() == secondaryID ){
+        if (secondaryID == 1){
+            for(Game g: existingGames){
+                if(g.getPlaceId() == placeID &&
+                        g.getGameTypeId() == gameTypeID &&
+                        g.getPrimaryCategoryId() == primaryID){
                     filteredGameNames.add(g.getName());
+                }
+            }
+        }else{
+            for(Game g: existingGames){
+                if(g.getPlaceId() == placeID &&
+                        g.getGameTypeId() == gameTypeID &&
+                        g.getPrimaryCategoryId() == primaryID &&
+                        g.getSecondaryCategoryId() == secondaryID ){
+                    filteredGameNames.add(g.getName());
+                }
             }
         }
+
+
         gameListAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, filteredGameNames);
         existingGamesListView.setAdapter(gameListAdapter);
