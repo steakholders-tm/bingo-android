@@ -25,23 +25,6 @@ public abstract class ModelGetter {
 
     public ModelGetter(Context c) {
         context = c;
-        /*
-        request(
-                "https://steakholders.eu/api/v1/place/?format=json",
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        System.out.println(error);
-                    }
-                });*/
     }
 
     protected ModelGetter() {
@@ -81,6 +64,12 @@ public abstract class ModelGetter {
         );
 
         queue.add(jsObjRequest);
+    }
+
+
+
+    public static void getAll(Context context, String apiPath, String filter, int id, JSONObject jsonObject, Response.Listener success, Response.ErrorListener error) {
+        requestAll(context, Request.Method.GET, API_URL + apiPath + API_FORMAT + "&" + filter + id, null, success, error);
     }
 }
 

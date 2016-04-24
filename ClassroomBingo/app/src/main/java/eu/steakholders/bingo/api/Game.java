@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class Game extends ModelGetterAndSetter implements Serializable{
     protected static String API_PATH = "games";
+    protected  static String FILTER = "game=";
     private int id;
     private String name;
     private String date;
@@ -126,6 +127,11 @@ public class Game extends ModelGetterAndSetter implements Serializable{
     public void save(Context context, Response.Listener success, Response.ErrorListener error){
         ModelGetterAndSetter.create(context, API_PATH,this.toJSONObject(),success, error);
     }
+
+    public void getWinners(Context context, Response.Listener success, Response.ErrorListener error){
+        ModelGetter.getAll(context,Winner.API_PATH,FILTER,id,this.toJSONObject(),success, error);
+    }
+
 
     protected static Game fromJSONObject(JSONObject response) {
         return new Game(

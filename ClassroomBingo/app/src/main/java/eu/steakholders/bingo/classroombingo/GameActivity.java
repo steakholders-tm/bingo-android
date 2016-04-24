@@ -15,12 +15,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 import eu.steakholders.bingo.api.Game;
 import eu.steakholders.bingo.api.Tile;
+import eu.steakholders.bingo.api.Winner;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -53,7 +57,22 @@ public class GameActivity extends AppCompatActivity {
         Game game  = (Game) intent.getSerializableExtra(MainActivity.GAME_OBJECT);
         populateTiles(game);
         init(game, nickname);
+        game.getWinners(this,  new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object object) {
+                        System.out.println("Got winners");
+                        System.out.println(object);
 
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("did not get winners");
+                        System.out.println(error);
+
+                    }
+                });
     }
 
 
@@ -223,6 +242,20 @@ public class GameActivity extends AppCompatActivity {
         if( incolumn || inrow ){
             Snackbar snackbar = Snackbar.make(overview, "You ("+nickname+ ") won!", Snackbar.LENGTH_LONG);
             snackbar.show();
+            Winner you = new Winner(nickname,game.getId());
+            you.save(this,  new Response.Listener<Object>() {
+                        @Override
+                        public void onResponse(Object object) {
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
         }
     }
 }
