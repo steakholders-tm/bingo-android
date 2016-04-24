@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class CreateGameFragment extends Fragment {
     private EditText dateInput;
     private EditText startTimeInput;
     private EditText durationInput;
-    private FrameLayout parent;
+    private ScrollView parent;
 
     //Variables fo game creation
     private Game gameObject;
@@ -101,7 +102,7 @@ public class CreateGameFragment extends Fragment {
         //Get context
         context = container.getContext();
 
-        parent = (FrameLayout) view.findViewById(R.id.parent);
+        parent = (ScrollView) view.findViewById(R.id.parent);
 
         parent.setOnTouchListener(new View.OnTouchListener() {
             @Override
