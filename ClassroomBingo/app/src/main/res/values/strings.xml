@@ -3,10 +3,10 @@
     <string name="action_settings">Settings</string>
 
     <!--String res for MainActivity-->
-    <string name="game_type">Game Type*:</string>
-    <string name="place">Place*:</string>
-    <string name="primary_category">Primary Category*:</string>
-    <string name="secondary_category">Secondary Category:</string>
+    <string name="game_type">Game Type:</string>
+    <string name="place">Place:</string>
+    <string name="primary_category">Class:</string>
+    <string name="secondary_category">Professor:</string>
     <string name="button_join">Join Game</string>
     <string name="button_create">Create Game</string>
 

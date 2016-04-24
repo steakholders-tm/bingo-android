@@ -30,7 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_frame"
-        android:layout_below="@id/include_toolbar">
+        android:layout_below="@id/include_toolbar"
+        android:padding="20dp">
 
         <include layout="@layout/include_main"
             android:layout_width="match_parent"
