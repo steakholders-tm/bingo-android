@@ -4,6 +4,7 @@ package eu.steakholders.bingo.api;
 import android.content.Context;
 
 import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;

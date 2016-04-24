@@ -89,7 +89,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="200dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:id="@+id/create_input_container"
         android:layout_gravity="right|top">
