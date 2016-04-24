@@ -8,8 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import eu.steakholders.bingo.classroombingo.MainActivity;
 
@@ -20,21 +22,14 @@ public class Winner extends ModelGetterAndSetter {
     private int gameId;
     private String time;
 
-    public String getName() {
-        return name;
+    public Winner(String nickname, int gameId) {
+        this.name = nickname;
+        this.gameId = gameId;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.FRANCE);
+        this.time = sdf.format(new Date());
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Winner(Context c) {
         super(c);
@@ -54,7 +49,21 @@ public class Winner extends ModelGetterAndSetter {
         this.gameId = gameId;
         this.time = time;
     }
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public static void getById(Context context, int id, final Response.Listener success , Response.ErrorListener error){
         ModelGetter.getById(
                 context,

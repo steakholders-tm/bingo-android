@@ -3,6 +3,7 @@ package eu.steakholders.bingo.classroombingo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -17,12 +18,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 import eu.steakholders.bingo.api.Game;
 import eu.steakholders.bingo.api.Tile;
+import eu.steakholders.bingo.api.Winner;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -34,6 +39,8 @@ public class GameActivity extends AppCompatActivity {
     private Game game;
     private ArrayList<TileButton> buttonTiles;
     private ArrayList<ArrayList<Boolean>> clickedTiles;
+    private boolean showTileNumbers = true;
+    private Integer numberOfWinners = null;
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -55,7 +62,49 @@ public class GameActivity extends AppCompatActivity {
         Game game  = (Game) intent.getSerializableExtra(MainActivity.GAME_OBJECT);
         populateTiles(game);
         init(game, nickname);
+        startGetWinners();
 
+    }
+
+    private void startGetWinners() {
+        final Handler h = new Handler();
+        final int delay_in_ms = 5000;
+
+        h.postDelayed(new Runnable(){
+            public void run(){
+                getWinners();
+                h.postDelayed(this, delay_in_ms);
+            }
+        }, delay_in_ms);
+    }
+
+    private void getWinners() {
+        game.getWinners(this,  new Response.Listener<ArrayList<Winner>>() {
+                    @Override
+                    public void onResponse(ArrayList<Winner> winners) {
+                        winnersCallBack(winners);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+    }
+
+    private void winnersCallBack(ArrayList<Winner> winners) {
+        if(numberOfWinners == null){
+            numberOfWinners = winners.size();
+        }
+        if(numberOfWinners < winners.size()){
+            Winner win = winners.get(winners.size() - 1);
+            numberOfWinners = winners.size();
+            if( win.getName() != nickname){
+                Snackbar snackbar = Snackbar.make(overview, win.getName() + " got Bingo!", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        }
     }
 
 
@@ -67,9 +116,13 @@ public class GameActivity extends AppCompatActivity {
         buttonTiles = getTiles();
         ArrayList<Tile> tiles = game.getTiles();
         tiles = shuffleTiles(tiles);
+        String prefix = "";
 
         for(int j = 0; j < buttonTiles.size(); j++){
-            buttonTiles.get(j).setText(tiles.get(j).getName());
+            if(showTileNumbers){
+                prefix = "" + (j + 1) + ". ";
+            }
+            buttonTiles.get(j).setText( prefix + tiles.get(j).getName());
         }
     }
 
@@ -190,6 +243,9 @@ public class GameActivity extends AppCompatActivity {
                 bigTile.setXY(x,y);
                 bigTile.linkOtherTile(otherTile);
                 otherTile.linkOtherTile(bigTile);
+                if(showTileNumbers){
+                    otherTile.setText("" + ((y*5)+(x+1)));
+                }
                 tiles.add(bigTile);
                 clickedTiles.get(y).add(false);
             }
@@ -225,6 +281,20 @@ public class GameActivity extends AppCompatActivity {
         if( incolumn || inrow ){
             Snackbar snackbar = Snackbar.make(overview, "You ("+nickname+ ") won!", Snackbar.LENGTH_LONG);
             snackbar.show();
+            Winner you = new Winner(nickname,game.getId());
+            you.save(this,  new Response.Listener<Object>() {
+                        @Override
+                        public void onResponse(Object object) {
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
         }
     }
 
