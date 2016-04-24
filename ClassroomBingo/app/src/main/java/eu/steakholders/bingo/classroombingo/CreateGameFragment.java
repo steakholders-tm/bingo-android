@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,15 +14,11 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-
 import java.util.List;
 import java.util.Map;
 
 import eu.steakholders.bingo.api.Game;
-import eu.steakholders.bingo.api.Tile;
+import eu.steakholders.bingo.util.UtilityClass;
 
 
 /**

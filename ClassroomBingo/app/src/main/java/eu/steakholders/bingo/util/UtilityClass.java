@@ -1,4 +1,4 @@
-package eu.steakholders.bingo.classroombingo;
+package eu.steakholders.bingo.util;
 
 import android.app.Activity;
 import android.util.Log;
