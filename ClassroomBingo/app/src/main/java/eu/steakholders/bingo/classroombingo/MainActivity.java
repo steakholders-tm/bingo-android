@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
     private String selectedSecondary;
 
     /**
-     * Initializes all dropdowns, lists, maps and gets info from the server
      *
      * @param savedInstanceState
      */
@@ -116,12 +115,11 @@ public class MainActivity extends AppCompatActivity {
                 init();
             }
         }, 3000);
-
-
-
     }
 
-
+    /**
+     * Initializes all dropdowns, lists, maps and gets info from the server
+     */
     private void init()  {
 
 
