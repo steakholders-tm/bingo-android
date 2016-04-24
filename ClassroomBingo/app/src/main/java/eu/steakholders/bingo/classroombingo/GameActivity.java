@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 import eu.steakholders.bingo.api.Game;
 import eu.steakholders.bingo.api.Tile;
@@ -30,6 +31,7 @@ public class GameActivity extends AppCompatActivity {
     private String nickname;
     private Game game;
     private ArrayList<TileButton> buttonTiles;
+    private ArrayList<ArrayList<Boolean>> clickedTiles;
 
     /**
      * Loads the board view, inflates the toolbar and starts the setup of the fab
@@ -49,10 +51,20 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nickname = intent.getStringExtra(MainActivity.NICKNAME);
         Game game  = (Game) intent.getSerializableExtra(MainActivity.GAME_OBJECT);
-        System.out.println(game.getName());
+        populateTiles(game);
+        init(game, nickname);
 
+    }
+
+
+    /**
+     * Shuffles game tiles and set gameTileButton texts to tile texts
+     * @param game
+     */
+    private void populateTiles(Game game){
         buttonTiles = getTiles();
         ArrayList<Tile> tiles = game.getTiles();
+        tiles = shuffleTiles(tiles);
 
         for(int j = 0; j < buttonTiles.size(); j++){
             buttonTiles.get(j).setText(tiles.get(j).getName());
@@ -163,21 +175,54 @@ public class GameActivity extends AppCompatActivity {
      */
     private ArrayList<TileButton> getTiles(){
         ArrayList<TileButton> tiles = new ArrayList<TileButton>();
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 5; j++){
-                String id = "tile" + i + j;
-                String idMini = "tileSmall" + i + j;
+        clickedTiles = new ArrayList<ArrayList<Boolean>>();
+        for(int y = 0; y < 5; y++){
+            clickedTiles.add(new ArrayList<Boolean>());
+            for(int x = 0; x < 5; x++){
+                String id = "tile" + y + x;
+                String idMini = "tileSmall" + y + x;
                 int resID = getResources().getIdentifier(id, "id", "eu.steakholders.bingo.classroombingo");
                 int resIDMini = getResources().getIdentifier(idMini, "id", "eu.steakholders.bingo.classroombingo");
                 TileButton otherTile = (TileButton) findViewById(resIDMini);
                 TileButton bigTile = (TileButton) findViewById(resID);
+                bigTile.setXY(x,y);
                 bigTile.linkOtherTile(otherTile);
                 otherTile.linkOtherTile(bigTile);
                 tiles.add(bigTile);
+                clickedTiles.get(y).add(false);
             }
         }
-
+        connectButtonTilesToGameLogic(tiles);
         return tiles;
     }
 
+    /**
+     * Gives tiles a reference to game activity so that tiles can call
+     * @param tileButtons
+     */
+    private void connectButtonTilesToGameLogic(ArrayList<TileButton> tileButtons) {
+        for(int i = 0; i < tileButtons.size(); i++){
+            tileButtons.get(i).setActivity(this);
+        }
+    }
+
+    public void tileButtonPressed(int x, int y, Boolean isClicked) {
+        clickedTiles.get(y).set(x, isClicked);
+        boolean incolumn = true;
+        boolean inrow = true;
+
+        ArrayList<Boolean> row = clickedTiles.get(y);
+        for(int i = 0; i < 5; i++){
+            if( !row.get(i)){
+                inrow= false;
+            }
+            if(!clickedTiles.get(i).get(x)){
+                incolumn = false;
+            }
+        }
+        if( incolumn || inrow ){
+            Snackbar snackbar = Snackbar.make(overview, "You ("+nickname+ ") won!", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+    }
 }
