@@ -8,7 +8,7 @@ import com.android.volley.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class ModelGetterAndSetter extends ModelGetter {
+public abstract class ModelGetterAndSetter extends ModelGetter {
 
     public ModelGetterAndSetter(Context c) {
         super(c);
