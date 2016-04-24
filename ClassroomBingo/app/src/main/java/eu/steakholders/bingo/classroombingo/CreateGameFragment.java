@@ -437,4 +437,8 @@ public class CreateGameFragment extends Fragment {
         return CREATE_FLAG;
     }
 
+    public void setFlag(){
+        CREATE_FLAG = false;
+    }
+
 }

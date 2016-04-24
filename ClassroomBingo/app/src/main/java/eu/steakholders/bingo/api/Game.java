@@ -117,6 +117,7 @@ public class Game extends ModelGetterAndSetter implements Serializable{
             jOjct.put("primary_category",this.primaryCategoryId);
             jOjct.put("secondary_category",this.secondaryCategoryId);
             jOjct.put("tiles",this.tiles);
+            jOjct.put("active",true);
         } catch (JSONException e) {
             e.printStackTrace();
         }

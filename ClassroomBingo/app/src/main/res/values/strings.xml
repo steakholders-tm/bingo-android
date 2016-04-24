@@ -14,11 +14,11 @@
     <string name="name">Name*:</string>
     <string name="date">Date*:</string>
     <string name="start">Start*:</string>
-    <string name="duration">Duration in hours*:</string>
+    <string name="duration">Duration*:</string>
     <string name="name_hint">Game name</string>
     <string name="date_hint">yyyy/mm/dd</string>
     <string name="start_time_hint">hh:mm</string>
-    <string name="duration_hint">Integer value in hours</string>
+    <string name="duration_hint">hours(integer)</string>
 
     <!--String res for JoinGameFragment-->
     <string name="placeholder">Placeholder</string>
