@@ -7,24 +7,185 @@
     android:padding="20dp">
 
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|top"
-        android:id="@+id/create_text_container"
-        android:layout_marginLeft="10dp">
+        android:layout_height="400dp"
+        android:id="@+id/scroll_view_create" >
 
-    </LinearLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/create_input_container"
-        android:layout_gravity="right|top">
 
-    </LinearLayout>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:id="@+id/create_name_text_view"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="185dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/game_name_input"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:hint="@string/name_hint"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_type"
+                    android:id="@+id/create_gt_text_view"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/create_spinner_gt"
+                    android:spinnerMode="dropdown" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/place"
+                    android:id="@+id/create_place_text_view"
+                    android:textSize="16sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/create_spinner_place"
+                    android:spinnerMode="dropdown"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/primary_category"
+                    android:id="@+id/create_pc_text_view"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/create_spinner_pc"
+                    android:spinnerMode="dropdown"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/secondary_category"
+                    android:id="@+id/create_sc_text_view"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/create_spinner_sc"
+                    android:spinnerMode="dropdown" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date"
+                    android:id="@+id/create_date_text_view"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:ems="10"
+                    android:id="@+id/create_game_date_field"
+                    android:singleLine="true"
+                    android:hint="@string/date_hint"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start"
+                    android:id="@+id/create_start_text_view"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="time"
+                    android:ems="10"
+                    android:id="@+id/create_start_time_field"
+                    android:singleLine="true"
+                    android:hint="@string/start_time_hint"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/duration"
+                    android:id="@+id/create_end_text_view"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/create_duration"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:hint="@string/duration_hint"/>
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
 
     <Button
         android:layout_width="150dp"
@@ -33,179 +194,5 @@
         android:id="@+id/create_new_game_button"
         android:layout_gravity="center_horizontal|bottom"
         android:onClick="newGame"/>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:id="@+id/create_name_text_view"
-                android:textSize="16sp" />
-
-            <EditText
-                android:layout_width="185dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/game_name_input"
-                android:inputType="text"
-                android:singleLine="true"
-                android:hint="@string/name_hint"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/game_type"
-                android:id="@+id/create_gt_text_view"
-                android:textSize="16sp" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:id="@+id/create_spinner_gt"
-                android:spinnerMode="dropdown" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/place"
-                android:id="@+id/create_place_text_view"
-                android:textSize="16sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:id="@+id/create_spinner_place"
-                android:spinnerMode="dropdown"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/primary_category"
-                android:id="@+id/create_pc_text_view"
-                android:textSize="16sp" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:id="@+id/create_spinner_pc"
-                android:spinnerMode="dropdown"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/secondary_category"
-                android:id="@+id/create_sc_text_view"
-                android:textSize="16sp" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:id="@+id/create_spinner_sc"
-                android:spinnerMode="dropdown" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:id="@+id/create_date_text_view"
-                android:textSize="16sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/create_game_date_field"
-                android:singleLine="true"
-                android:hint="@string/date_hint"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/start"
-                android:id="@+id/create_start_text_view"
-                android:textSize="16sp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="time"
-                android:ems="10"
-                android:id="@+id/create_start_time_field"
-                android:singleLine="true"
-                android:hint="@string/start_time_hint"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/duration"
-                android:id="@+id/create_end_text_view"
-                android:textSize="16sp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/create_duration"
-                android:singleLine="true"
-                android:inputType="number"
-                android:hint="@string/duration_hint"/>
-        </TableRow>
-
-    </TableLayout>
 
 </FrameLayout>
