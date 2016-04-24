@@ -11,6 +11,9 @@ public class TileButton extends Button implements OnClickListener{
     private boolean isClicked = false;
     private int pressed_color = Color.MAGENTA;
     private TileButton otherTile;
+    private GameActivity gameActivity;
+    private int y;
+    private int x;
 
     public TileButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -41,18 +44,29 @@ public class TileButton extends Button implements OnClickListener{
 
         if(isClicked){
             this.setBackgroundResource(R.drawable.button_tile);
-            //this.setbac
             isClicked = false;
         }
         else{
             this.setBackgroundResource(R.drawable.button_tile_clicked);
-            //this.setBackgroundColor(pressed_color);
             isClicked = true;
+        }
+        if(gameActivity != null){
+
+            gameActivity.tileButtonPressed(this.x, this.y, isClicked);
         }
     }
 
 
     public void linkOtherTile(TileButton otherTile) {
         this.otherTile = otherTile;
+    }
+
+    public void setActivity(GameActivity activity) {
+        this.gameActivity = activity;
+    }
+
+    public void setXY(int i, int j) {
+        x = i;
+        y = j;
     }
 }
