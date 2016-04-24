@@ -18,6 +18,8 @@ import android.widget.TextView;
  */
 public class JoinGameFragment extends Fragment {
 
+    private static boolean JOIN_FLAG = false;
+
     //Fields
     private TextView gameNameView;
     private EditText nickNameView;
@@ -74,7 +76,13 @@ public class JoinGameFragment extends Fragment {
      * Sets nickname for the user
      */
     public void setNickName(){
-        this.nickName = nickNameView.getText().toString();
+        if(nickNameView.getText().toString().matches("")){
+            JOIN_FLAG = false;
+        }else{
+            this.nickName = nickNameView.getText().toString();
+            JOIN_FLAG = true;
+        }
+
     }
 
     /**
@@ -91,6 +99,10 @@ public class JoinGameFragment extends Fragment {
      */
     public String getNickName(){
         return nickName;
+    }
+
+    public boolean getFlag(){
+        return JOIN_FLAG;
     }
 
 }

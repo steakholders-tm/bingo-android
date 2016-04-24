@@ -255,11 +255,19 @@ public class MainActivity extends AppCompatActivity {
      */
     public void joinGame(View view){
         joinGameFragment.setNickName();
-        nickname = joinGameFragment.getNickName();
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(MainActivity.GAME_OBJECT, gameObject);
-        intent.putExtra(MainActivity.NICKNAME, nickname);
-        startActivity(intent);
+        if(joinGameFragment.getFlag()){
+            nickname = joinGameFragment.getNickName();
+            Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra(MainActivity.GAME_OBJECT, gameObject);
+            intent.putExtra(MainActivity.NICKNAME, nickname);
+            startActivity(intent);
+        }else{
+            Snackbar snackbar = Snackbar
+                    .make(mainPage, "Did you add a nickname?", Snackbar.LENGTH_LONG);
+
+            snackbar.show();
+        }
+
     }
 
     /**
